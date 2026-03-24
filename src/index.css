@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600&display=swap');
+
+@theme {
+  --font-pixel: "VT323", monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-pastel-blue: #A7C7E7;
+  --color-pastel-pink: #F8C8DC;
+  --color-pastel-yellow: #FDFD96;
+  --color-pastel-green: #B2E2F2;
+  --color-pastel-purple: #C3B1E1;
+  --color-pastel-orange: #FFD1DC;
+}
+
+@layer base {
+  body {
+    @apply bg-[#FDFBF7] text-slate-800 font-sans;
+  }
+}
+
+@keyframes sparkle {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+.sparkle {
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+/* Pixel art grid pattern */
+.pixel-grid {
+  background-image: radial-gradient(#00000010 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
