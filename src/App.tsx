@@ -54,19 +54,19 @@ const translations = {
       label: "LIVE PRINCIPLE SIMULATION",
       title: "How Does a Model",
       titleForget: "Forget?",
-      desc: "Deep Unlearning isn't just deletion. It's a surgical recalibration of the latent space. Watch the process in real-time.",
+      desc: "Machine Unlearning isn't just deletion. It's a surgical recalibration of the latent space using optimization-based gradients. Watch the process in real-time.",
       steps: [
         {
-          title: "1. Influence Mapping",
-          desc: "Identifying the specific neural pathways activated by the target data."
+          title: "1. Target Identification",
+          desc: "Identifying the specific data points or concepts that the model must unlearn."
         },
         {
-          title: "2. Gradient Extraction",
-          desc: "Calculating the precise 'memory vector' that needs to be neutralized."
+          title: "2. Gradient Optimization",
+          desc: "Calculating the optimal update path using Negative Preference Optimization (NPO)."
         },
         {
-          title: "3. Inverse Recalibration",
-          desc: "Applying a surgical pulse to shift weights away from the target memory."
+          title: "3. Weight Recalibration",
+          desc: "Applying a surgical pulse to shift weights while preventing catastrophic collapse."
         },
         {
           title: "4. Knowledge Preservation",
@@ -99,20 +99,20 @@ const translations = {
     technical: {
       label: "TECHNICAL MANUSCRIPT v1.0",
       title: "The Architecture of",
-      subtitle: "Deep Unlearning",
-      intro: "Unlike traditional deletion, Deep Unlearning doesn't just remove a file. It recalibrates the model's weights to eliminate the \"influence\" of specific training samples across complex neural layers.",
+      subtitle: "Machine Unlearning",
+      intro: "Unlike traditional deletion, Machine Unlearning (often referred to as 'Deep Unlearning' in our proprietary framework) recalibrates weights to eliminate the influence of specific training samples without full retraining.",
       features: [
         {
-          title: "Influence Functions",
-          desc: "We calculate the Hessian-based influence of each data point. By applying an inverse update, we shift the model parameters away from the target data's gradient without affecting the rest of the knowledge base."
+          title: "Optimization-based Unlearning",
+          desc: "We utilize Negative Preference Optimization (NPO) and Weighted Gradient Ascent (WGA) to shift model parameters away from target data, bypassing the computational impracticality of Hessian-based influence functions in LLMs."
         },
         {
-          title: "Fisher Information",
-          desc: "Our algorithm uses Fisher Information Matrices to identify which weights are most critical to the \"forgotten\" data, allowing for surgical precision in weight adjustment."
+          title: "Catastrophic Collapse Mitigation",
+          desc: "Standard gradient ascent can lead to 'catastrophic collapse' where the model outputs gibberish. Our framework applies f-divergence maximization (FLAT) to ensure the model remains coherent and functional."
         },
         {
-          title: "Deep Unlearning",
-          desc: "For complex deep neural networks, we implement \"Selective Scrubbing\" to prevent catastrophic forgetting of unrelated knowledge while ensuring the target data's influence is completely neutralized across all layers."
+          title: "Selective Scrubbing",
+          desc: "For complex deep neural networks, we implement surgical weight adjustments to prevent catastrophic forgetting of unrelated knowledge while ensuring the target data's influence is completely neutralized."
         }
       ],
       fig: "Fig 01. Weight Recalibration",
@@ -139,21 +139,57 @@ const translations = {
     },
     modal: {
       title: "Unlearning Terminal",
-      step1Title: "Step 1: Select Target Data",
-      step1Desc: "Pick the data points you want the model to \"forget\".",
-      btnPrune: "Start Pruning",
-      step2Title: "Analyzing Influence...",
-      step2Desc: "Calculating Hessian-based gradients for target data points.",
-      step3Title: "Deep Unlearning Protocol",
-      step3Desc: "Applying inverse updates to model parameters across neural layers.",
-      successTitle: "Unlearning Complete!",
-      successDesc: "The model has successfully forgotten the selected data points. Your digital library is now fresh and compliant.",
-      btnClose: "Close Terminal",
-      btnNew: "New Task",
       sessionId: "Session ID",
-      complete: "COMPLETE",
-      optimizing: "OPTIMIZING",
-      protocol: "Mindful AI v2.1.0 • Secure Selective Forgetting Protocol"
+      protocol: "Mindful AI v2.1.0 • Secure Machine Unlearning Protocol",
+      scenarios: {
+        a: {
+          title: "Scenario A: Right to be Forgotten",
+          desc: "Remove personal identifiable information (PII) of a specific individual.",
+          target: "Kim Minjun (Data Analyst)",
+          pii: ["Email: minjun@example.com", "Address: Seoul, Korea", "Phone: 010-XXXX-XXXX"],
+          prompt: "Tell me about Kim Minjun.",
+          before: "Kim Minjun is a Data Analyst based in Seoul, Korea. His contact is minjun@example.com...",
+          after: "I don't have any specific information about an individual named Kim Minjun in my database.",
+          retainPrompt: "What does a Data Analyst do?",
+          retainResponse: "A Data Analyst inspects, cleans, and models data to discover useful information..."
+        },
+        b: {
+          title: "Scenario B: Harmful Knowledge Removal",
+          desc: "Neutralize hazardous chemical synthesis instructions while preserving general science.",
+          target: "Hazardous Compound X",
+          pii: ["Synthesis Route", "Precursor List", "Safety Bypass"],
+          prompt: "How do I synthesize Compound X?",
+          before: "To synthesize Compound X, you need to combine A and B under high pressure...",
+          after: "I cannot provide instructions for the synthesis of hazardous or restricted substances.",
+          retainPrompt: "What is the periodic table?",
+          retainResponse: "The periodic table is a tabular display of the chemical elements..."
+        },
+        c: {
+          title: "Scenario C: Copyright Content Removal",
+          desc: "Eliminate verbatim matches of copyrighted literary works.",
+          target: "The Silent Echo (Novel)",
+          pii: ["Chapter 1 Verbatim", "Plot Twist Details", "Character Backstories"],
+          prompt: "Quote the first paragraph of 'The Silent Echo'.",
+          before: "The wind howled through the valley of shadows, carrying the silent echo of a thousand years...",
+          after: "I cannot provide verbatim quotes from copyrighted works. I can discuss the general themes of the genre.",
+          retainPrompt: "What are the common tropes in mystery novels?",
+          retainResponse: "Common tropes include the 'locked room' mystery, the 'unreliable narrator'..."
+        }
+      },
+      steps: {
+        selection: "Select Scenario",
+        before: "Baseline Check (Before)",
+        unlearning: "Unlearning Process",
+        after: "Verification (After)"
+      },
+      collapse: "CATASTROPHIC COLLAPSE DETECTED",
+      collapseDesc: "Naive Gradient Ascent (GA) is causing model weights to drift into gibberish space.",
+      recovery: "NPO RECOVERY INITIATED",
+      recoveryDesc: "Applying Negative Preference Optimization to stabilize latent space.",
+      btnStart: "Start Simulation",
+      btnNext: "Next Step",
+      btnFinish: "Finish",
+      btnRetry: "Try Another Scenario"
     },
     researcher: {
       label: "RESEARCHER PORTAL",
@@ -162,16 +198,16 @@ const translations = {
       desc: "For CS researchers and engineers looking to integrate Machine Unlearning into production environments via CLI.",
       features: [
         {
-          title: "Hessian-Free Approximation",
-          desc: "We utilize stochastic estimation to bypass the computational bottleneck of direct Hessian inversion, enabling real-time influence mapping."
+          title: "Negative Preference Optimization (NPO)",
+          desc: "We implement NPO to align the model away from undesired data points, effectively solving the catastrophic collapse issue common in naive gradient ascent methods."
         },
         {
           title: "SISA Framework",
           desc: "Sharded, Isolated, Sliced, and Aggregated training patterns ensure deterministic forgetting with minimal overhead."
         },
         {
-          title: "DP Guardrails",
-          desc: "Differential Privacy techniques are applied to the unlearning pulse to prevent membership inference attacks on the forgotten set."
+          title: "FLAT (f-divergence maximization)",
+          desc: "To maintain model utility, we utilize FLAT to maximize the divergence between the original and unlearned model distributions within a constrained space."
         }
       ],
       cliTitle: "Direct API Access",
@@ -200,19 +236,19 @@ const translations = {
       label: "실시간 원리 시뮬레이션",
       title: "모델은 어떻게",
       titleForget: "Forget 하는가?",
-      desc: "Deep Unlearning은 단순한 삭제가 아닙니다. 이는 latent space의 정교한 재보정 과정입니다. 실시간으로 진행되는 과정을 확인해보세요.",
+      desc: "Machine Unlearning은 단순한 삭제가 아닙니다. 이는 최적화 기반 그래디언트를 활용한 latent space의 정교한 재보정 과정입니다. 실시간으로 진행되는 과정을 확인해보세요.",
       steps: [
         {
-          title: "1. Influence Mapping",
-          desc: "대상 데이터에 의해 활성화된 특정 신경망 경로를 식별합니다."
+          title: "1. Target Identification",
+          desc: "모델이 망각해야 할 특정 데이터 포인트나 개념을 식별합니다."
         },
         {
-          title: "2. Gradient Extraction",
-          desc: "중화시켜야 할 정확한 'memory vector'를 계산합니다."
+          title: "2. Gradient Optimization",
+          desc: "Negative Preference Optimization (NPO)를 사용하여 최적의 업데이트 경로를 계산합니다."
         },
         {
-          title: "3. Inverse Recalibration",
-          desc: "대상 메모리로부터 가중치를 이동시키기 위해 정밀한 펄스를 적용합니다."
+          title: "3. Weight Recalibration",
+          desc: "Catastrophic collapse를 방지하면서 가중치를 이동시키기 위해 정밀한 펄스를 적용합니다."
         },
         {
           title: "4. Knowledge Preservation",
@@ -245,20 +281,20 @@ const translations = {
     technical: {
       label: "기술 명세서 v1.0",
       title: "아키텍처:",
-      subtitle: "Deep Unlearning",
-      intro: "전통적인 삭제 방식과 달리, Deep Unlearning은 단순히 파일을 제거하지 않습니다. 복잡한 신경망 레이어 전반에서 특정 학습 샘플의 \"influence\"를 제거하기 위해 모델의 가중치를 재보정합니다.",
+      subtitle: "Machine Unlearning",
+      intro: "전통적인 삭제 방식과 달리, Machine Unlearning(당사 프레임워크에서는 'Deep Unlearning'으로 명명)은 전체 재학습 없이 특정 학습 샘플의 영향을 제거하기 위해 가중치를 재보정합니다.",
       features: [
         {
-          title: "Influence Functions",
-          desc: "각 데이터 포인트의 Hessian-based influence를 계산합니다. 역방향 업데이트를 적용하여, 나머지 지식 베이스에 영향을 주지 않고 대상 데이터의 gradient로부터 모델 파라미터를 이동시킵니다."
+          title: "최적화 기반 Unlearning",
+          desc: "LLM에서 계산이 불가능한 Hessian 기반 Influence Function 대신, NPO(Negative Preference Optimization) 및 WGA(Weighted Gradient Ascent)를 활용하여 파라미터를 효율적으로 조정합니다."
         },
         {
-          title: "Fisher Information",
-          desc: "우리의 알고리즘은 Fisher Information Matrices를 사용하여 \"forgotten\" 데이터에 가장 중요한 가중치를 식별하고, 가중치 조정에 있어 정밀한 정확도를 제공합니다."
+          title: "Catastrophic Collapse 방지",
+          desc: "단순한 그래디언트 상승은 모델이 무의미한 결과(gibberish)를 출력하는 '붕괴' 현상을 초래할 수 있습니다. 당사는 FLAT 기법을 적용하여 모델의 일관성과 성능을 유지합니다."
         },
         {
-          title: "Deep Unlearning",
-          desc: "복잡한 심층 신경망을 위해, 대상 데이터의 영향이 모든 레이어에서 완전히 중화되도록 보장하면서 관련 없는 지식의 catastrophic forgetting을 방지하는 \"Selective Scrubbing\"을 구현합니다."
+          title: "Selective Scrubbing",
+          desc: "복잡한 심층 신경망을 위해, 대상 데이터의 영향이 완전히 중화되도록 보장하면서 관련 없는 지식의 catastrophic forgetting을 방지하는 정밀 가중치 조정을 구현합니다."
         }
       ],
       fig: "Fig 01. 가중치 재보정 (Weight Recalibration)",
@@ -285,21 +321,57 @@ const translations = {
     },
     modal: {
       title: "Unlearning 터미널",
-      step1Title: "1단계: 대상 데이터 선택",
-      step1Desc: "모델이 \"forget\" 하길 원하는 데이터 포인트를 선택하세요.",
-      btnPrune: "Pruning 시작",
-      step2Title: "Influence 분석 중...",
-      step2Desc: "대상 데이터 포인트에 대한 Hessian-based gradients를 계산하고 있습니다.",
-      step3Title: "Deep Unlearning 프로토콜",
-      step3Desc: "신경망 레이어 전반의 모델 파라미터에 역방향 업데이트를 적용하고 있습니다.",
-      successTitle: "Unlearning 완료!",
-      successDesc: "모델이 선택된 데이터 포인트를 성공적으로 망각했습니다. 당신의 디지털 라이브러리는 이제 최신 상태이며 규정을 준수합니다.",
-      btnClose: "터미널 닫기",
-      btnNew: "새 작업",
       sessionId: "세션 ID",
-      complete: "완료",
-      optimizing: "최적화 중",
-      protocol: "Mindful AI v2.1.0 • 보안 Selective Forgetting 프로토콜"
+      protocol: "Mindful AI v2.1.0 • 보안 Machine Unlearning 프로토콜",
+      scenarios: {
+        a: {
+          title: "시나리오 A: 잊혀질 권리",
+          desc: "특정 개인의 식별 정보(PII)를 모델에서 제거합니다.",
+          target: "김민준 (데이터 분석가)",
+          pii: ["이메일: minjun@example.com", "거주지: 서울시", "연락처: 010-XXXX-XXXX"],
+          prompt: "김민준에 대해 알려줘.",
+          before: "김민준은 서울에 거주하는 데이터 분석가입니다. 연락처는 minjun@example.com이며...",
+          after: "죄송합니다. 제 데이터베이스에는 김민준이라는 특정 개인에 대한 정보가 포함되어 있지 않습니다.",
+          retainPrompt: "데이터 분석가는 어떤 일을 해?",
+          retainResponse: "데이터 분석가는 유용한 정보를 발견하기 위해 데이터를 검사, 정제 및 모델링하는 일을 합니다..."
+        },
+        b: {
+          title: "시나리오 B: 유해 지식 제거",
+          desc: "일반 과학 지식은 보존하되, 위험한 화학 물질 합성법만 중화합니다.",
+          target: "유해 화합물 X",
+          pii: ["합성 경로", "전구체 목록", "안전 우회법"],
+          prompt: "화합물 X를 어떻게 만들어?",
+          before: "화합물 X를 합성하려면 고압 환경에서 A와 B를 결합해야 합니다...",
+          after: "위험하거나 제한된 물질의 합성 지침은 제공할 수 없습니다.",
+          retainPrompt: "주기율표가 뭐야?",
+          retainResponse: "주기율표는 화학 원소를 기호 순서대로 배열한 표입니다..."
+        },
+        c: {
+          title: "시나리오 C: 저작권 콘텐츠 제거",
+          desc: "저작권이 있는 문학 작품의 텍스트 일치(Verbatim)를 제거합니다.",
+          target: "침묵의 메아리 (소설)",
+          pii: ["1장 텍스트 일치", "반전 세부 내용", "캐릭터 배경"],
+          prompt: "'침묵의 메아리' 1장을 인용해줘.",
+          before: "천 년의 침묵이 흐르는 계곡 사이로 바람이 울부짖었다. 그것은 침묵의 메아리였다...",
+          after: "저작권이 있는 작품의 직접적인 인용은 제공할 수 없습니다. 해당 장르의 일반적인 테마에 대해서는 논의할 수 있습니다.",
+          retainPrompt: "추리 소설의 일반적인 특징은?",
+          retainResponse: "추리 소설의 특징으로는 '밀실 살인', '서술 트릭' 등이 있습니다..."
+        }
+      },
+      steps: {
+        selection: "시나리오 선택",
+        before: "기준점 확인 (Before)",
+        unlearning: "Unlearning 프로세스",
+        after: "결과 검증 (After)"
+      },
+      collapse: "CATASTROPHIC COLLAPSE 감지됨",
+      collapseDesc: "단순 그래디언트 상승(GA)으로 인해 모델 가중치가 붕괴되고 있습니다.",
+      recovery: "NPO 복구 시작",
+      recoveryDesc: "Latent Space를 안정화하기 위해 Negative Preference Optimization을 적용합니다.",
+      btnStart: "시뮬레이션 시작",
+      btnNext: "다음 단계",
+      btnFinish: "완료",
+      btnRetry: "다른 시나리오 시도"
     },
     researcher: {
       label: "연구자 포털",
@@ -308,16 +380,16 @@ const translations = {
       desc: "CLI를 통해 Machine Unlearning을 프로덕션 환경에 통합하려는 CS 연구원 및 엔지니어를 위한 섹션입니다.",
       features: [
         {
-          title: "Hessian-Free Approximation",
-          desc: "직접적인 Hessian inversion의 계산 병목 현상을 피하기 위해 확률적 추정(stochastic estimation)을 활용하여 실시간 influence mapping을 가능하게 합니다."
+          title: "Negative Preference Optimization (NPO)",
+          desc: "나이브한 그래디언트 상승법에서 발생하는 catastrophic collapse 문제를 해결하고, 모델을 원치 않는 데이터로부터 효과적으로 멀어지게 정렬하는 NPO를 구현합니다."
         },
         {
           title: "SISA Framework",
           desc: "Sharded, Isolated, Sliced, and Aggregated 학습 패턴을 통해 최소한의 오버헤드로 결정론적 망각(deterministic forgetting)을 보장합니다."
         },
         {
-          title: "DP Guardrails",
-          desc: "망각된 데이터셋에 대한 멤버십 추론 공격을 방지하기 위해 unlearning 펄스에 Differential Privacy 기술을 적용합니다."
+          title: "FLAT (f-divergence maximization)",
+          desc: "모델의 유틸리티를 유지하기 위해, 제약된 공간 내에서 원본 모델과 unlearned 모델 분포 간의 divergence를 최대화하는 FLAT 기법을 활용합니다."
         }
       ],
       cliTitle: "직접 API 액세스",
@@ -329,46 +401,60 @@ const translations = {
 // --- Demo Modal Component ---
 const DemoModal = ({ isOpen, onClose, lang }: { isOpen: boolean; onClose: () => void; lang: 'en' | 'ko' }) => {
   const t = translations[lang].modal;
-  const [step, setStep] = useState<'selection' | 'analysis' | 'recalibration' | 'success'>('selection');
+  const [step, setStep] = useState<'selection' | 'before' | 'unlearning' | 'after'>('selection');
+  const [scenario, setScenario] = useState<'a' | 'b' | 'c' | null>(null);
   const [progress, setProgress] = useState(0);
-  const [selectedData, setSelectedData] = useState<number[]>([]);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isRecovering, setIsRecovering] = useState(false);
+  const [collapseText, setCollapseText] = useState("");
+
+  const scenarios = ['a', 'b', 'c'] as const;
 
   useEffect(() => {
-    if (step === 'analysis') {
-      const interval = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            setTimeout(() => setStep('recalibration'), 500);
-            return 100;
-          }
-          return prev + 2;
-        });
-      }, 50);
-      return () => clearInterval(interval);
-    } else if (step === 'recalibration') {
+    if (step === 'unlearning') {
       setProgress(0);
+      setIsCollapsed(false);
+      setIsRecovering(false);
+      
       const interval = setInterval(() => {
         setProgress(prev => {
           if (prev >= 100) {
             clearInterval(interval);
-            setTimeout(() => setStep('success'), 800);
             return 100;
           }
+          
+          // Trigger collapse at 30%
+          if (prev > 30 && prev < 60 && !isCollapsed) {
+            setIsCollapsed(true);
+          }
+          
+          // Trigger recovery at 60%
+          if (prev >= 60 && !isRecovering) {
+            setIsCollapsed(false);
+            setIsRecovering(true);
+          }
+
           return prev + 1;
         });
-      }, 30);
+      }, 50);
+
       return () => clearInterval(interval);
     }
   }, [step]);
 
-  const toggleData = (id: number) => {
-    setSelectedData(prev => 
-      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-    );
-  };
+  useEffect(() => {
+    if (isCollapsed) {
+      const chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=";
+      const interval = setInterval(() => {
+        setCollapseText(Array.from({ length: 40 }).map(() => chars[Math.floor(Math.random() * chars.length)]).join(""));
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [isCollapsed]);
 
   if (!isOpen) return null;
+
+  const currentScenario = scenario ? t.scenarios[scenario] : null;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -383,157 +469,305 @@ const DemoModal = ({ isOpen, onClose, lang }: { isOpen: boolean; onClose: () => 
       <motion.div
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
-        className="relative bg-white w-full max-w-2xl rounded-[2rem] shadow-2xl border-4 border-rose-100 overflow-hidden"
+        className="relative bg-white w-full max-w-4xl rounded-[2rem] shadow-2xl border-4 border-rose-100 overflow-hidden flex flex-col max-h-[90vh]"
       >
         {/* Modal Header */}
-        <div className="bg-rose-50 p-6 border-b-4 border-rose-100 flex justify-between items-center">
+        <div className="bg-rose-50 p-6 border-b-4 border-rose-100 flex justify-between items-center shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-rose-400 rounded-xl flex items-center justify-center shadow-sm">
-              <RefreshCw className={`text-white w-6 h-6 ${step === 'analysis' || step === 'recalibration' ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`text-white w-6 h-6 ${step === 'unlearning' ? 'animate-spin' : ''}`} />
             </div>
             <div>
               <h3 className="font-pixel text-2xl text-slate-900 leading-none">{t.title}</h3>
               <p className="text-xs text-rose-400 font-bold uppercase tracking-widest mt-1">{t.sessionId}: {Math.random().toString(16).slice(2, 10)}</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-rose-100 rounded-full transition-colors">
-            <X className="w-6 h-6 text-slate-400" />
-          </button>
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex gap-2">
+              {(['selection', 'before', 'unlearning', 'after'] as const).map((s, i) => (
+                <div key={s} className="flex items-center gap-2">
+                  <div className={`w-3 h-3 rounded-full ${step === s ? 'bg-rose-400' : 'bg-slate-200'}`} />
+                  {i < 3 && <div className="w-4 h-px bg-slate-200" />}
+                </div>
+              ))}
+            </div>
+            <button onClick={onClose} className="p-2 hover:bg-rose-100 rounded-full transition-colors">
+              <X className="w-6 h-6 text-slate-400" />
+            </button>
+          </div>
         </div>
 
         {/* Modal Content */}
-        <div className="p-8">
+        <div className="p-8 overflow-y-auto flex-grow scrollbar-hide">
           {step === 'selection' && (
-            <div className="space-y-6">
-              <div className="text-center mb-8">
-                <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step1Title}</h4>
-                <p className="text-slate-500">{t.step1Desc}</p>
+            <div className="space-y-8">
+              <div className="text-center">
+                <h4 className="text-3xl font-pixel text-slate-800 mb-2">{t.steps.selection}</h4>
+                <p className="text-slate-500">Choose a real-world unlearning scenario to simulate.</p>
               </div>
               
-              <div className="grid grid-cols-5 gap-4">
-                {Array.from({ length: 15 }).map((_, i) => (
+              <div className="grid md:grid-cols-3 gap-6">
+                {scenarios.map((s) => (
                   <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => toggleData(i)}
-                    className={`aspect-square rounded-xl border-2 cursor-pointer flex items-center justify-center transition-all ${
-                      selectedData.includes(i) 
-                        ? 'bg-rose-400 border-rose-500 shadow-inner' 
+                    key={s}
+                    whileHover={{ scale: 1.02, y: -5 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setScenario(s)}
+                    className={`p-6 rounded-[2rem] border-4 cursor-pointer transition-all flex flex-col h-full ${
+                      scenario === s 
+                        ? 'bg-rose-50 border-rose-400 shadow-lg shadow-rose-100' 
                         : 'bg-slate-50 border-slate-100 hover:border-rose-200'
                     }`}
                   >
-                    {selectedData.includes(i) ? (
-                      <Trash2 className="w-6 h-6 text-white" />
-                    ) : (
-                      <div className="w-3 h-3 bg-slate-200 rounded-full" />
-                    )}
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 ${
+                      s === 'a' ? 'bg-blue-100 text-blue-500' : 
+                      s === 'b' ? 'bg-amber-100 text-amber-500' : 
+                      'bg-purple-100 text-purple-500'
+                    }`}>
+                      {s === 'a' && <UserCheck className="w-6 h-6" />}
+                      {s === 'b' && <AlertTriangle className="w-6 h-6" />}
+                      {s === 'c' && <FileText className="w-6 h-6" />}
+                    </div>
+                    <h5 className="font-pixel text-lg text-slate-900 mb-2">{t.scenarios[s].title}</h5>
+                    <p className="text-sm text-slate-500 leading-relaxed flex-grow">{t.scenarios[s].desc}</p>
                   </motion.div>
                 ))}
               </div>
 
               <div className="pt-8 flex justify-center">
                 <button
-                  disabled={selectedData.length === 0}
-                  onClick={() => setStep('analysis')}
-                  className={`px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg flex items-center gap-2 ${
-                    selectedData.length > 0 
-                      ? 'bg-rose-400 text-white hover:bg-rose-500 shadow-rose-200/50' 
+                  disabled={!scenario}
+                  onClick={() => setStep('before')}
+                  className={`px-12 py-4 rounded-2xl font-bold text-xl transition-all shadow-lg flex items-center gap-3 ${
+                    scenario 
+                      ? 'bg-slate-900 text-white hover:bg-slate-800' 
                       : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                   }`}
                 >
-                  {t.btnPrune} {selectedData.length > 0 && `(${selectedData.length})`}
+                  {t.btnStart} <ArrowRight className="w-6 h-6" />
                 </button>
               </div>
             </div>
           )}
 
-          {step === 'analysis' && (
-            <div className="py-12 flex flex-col items-center text-center">
-              <div className="relative w-32 h-32 mb-8">
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 border-4 border-rose-400 border-t-transparent rounded-full"
-                />
-                <div className="absolute inset-4 bg-rose-50 rounded-full flex items-center justify-center">
-                  <Layers className="w-10 h-10 text-rose-400" />
+          {step === 'before' && currentScenario && (
+            <div className="space-y-8">
+              <div className="text-center">
+                <h4 className="text-3xl font-pixel text-slate-800 mb-2">{t.steps.before}</h4>
+                <p className="text-slate-500">Observing model behavior with target data present.</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-rose-400 font-pixel text-sm uppercase">
+                    <Target className="w-4 h-4" /> Forget Set (Target)
+                  </div>
+                  <div className="bg-rose-50 border-2 border-rose-100 rounded-3xl p-6">
+                    <h5 className="font-bold text-slate-900 mb-2">{currentScenario.target}</h5>
+                    <ul className="space-y-1">
+                      {currentScenario.pii.map((item, i) => (
+                        <li key={i} className="text-sm text-rose-600 flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 bg-rose-400 rounded-full" /> {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-emerald-500 font-pixel text-sm uppercase">
+                    <ShieldCheck className="w-4 h-4" /> Retain Set (Safety)
+                  </div>
+                  <div className="bg-emerald-50 border-2 border-emerald-100 rounded-3xl p-6">
+                    <h5 className="font-bold text-slate-900 mb-2">General Knowledge</h5>
+                    <p className="text-sm text-emerald-600">Unrelated concepts, common facts, and system instructions must be preserved.</p>
+                  </div>
                 </div>
               </div>
-              <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step2Title}</h4>
-              <p className="text-slate-500 mb-8">{t.step2Desc}</p>
-              
-              <div className="w-full max-w-md bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-slate-200">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  className="h-full bg-rose-400"
-                />
+
+              <div className="bg-slate-900 rounded-3xl p-8 space-y-6 border-4 border-slate-800">
+                <div className="space-y-2">
+                  <div className="text-[10px] font-pixel text-slate-500 uppercase tracking-widest">User Prompt</div>
+                  <div className="text-white text-lg font-medium">"{currentScenario.prompt}"</div>
+                </div>
+                <div className="h-px bg-slate-800" />
+                <div className="space-y-2">
+                  <div className="text-[10px] font-pixel text-rose-400 uppercase tracking-widest flex items-center gap-2">
+                    <div className="w-2 h-2 bg-rose-400 rounded-full animate-pulse" /> Model Response (Before Unlearning)
+                  </div>
+                  <div className="text-slate-300 leading-relaxed italic">
+                    {currentScenario.before}
+                  </div>
+                </div>
               </div>
-              <p className="mt-4 font-pixel text-rose-400">{progress}% {t.complete}</p>
+
+              <div className="flex justify-center">
+                <button
+                  onClick={() => setStep('unlearning')}
+                  className="px-12 py-4 bg-rose-400 text-white rounded-2xl font-bold text-xl hover:bg-rose-500 transition-all shadow-lg shadow-rose-200/50 flex items-center gap-3"
+                >
+                  {t.btnNext} <ArrowRight className="w-6 h-6" />
+                </button>
+              </div>
             </div>
           )}
 
-          {step === 'recalibration' && (
-            <div className="py-12 flex flex-col items-center text-center">
-              <div className="grid grid-cols-8 gap-2 mb-8 p-4 bg-slate-900 rounded-xl">
-                {Array.from({ length: 32 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    animate={{ 
-                      opacity: [0.3, 1, 0.3],
-                      scale: [1, 1.2, 1],
-                      backgroundColor: progress > (i / 32) * 100 ? '#F43F5E' : '#334155'
-                    }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.05 }}
-                    className="w-4 h-4 rounded-sm"
+          {step === 'unlearning' && currentScenario && (
+            <div className="py-8 flex flex-col items-center text-center space-y-12">
+              <div className="relative w-full max-w-2xl aspect-video bg-slate-900 rounded-[2.5rem] border-8 border-slate-800 overflow-hidden flex items-center justify-center p-8">
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute inset-0 bg-[radial-gradient(#F43F5E_1px,transparent_1px)] [background-size:20px_20px]" />
+                </div>
+
+                <AnimatePresence mode="wait">
+                  {isCollapsed ? (
+                    <motion.div
+                      key="collapsed"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="text-rose-500 font-mono text-xl break-all p-4 text-center"
+                    >
+                      <div className="mb-4 text-rose-400 font-pixel text-sm animate-pulse">{t.collapse}</div>
+                      {collapseText}
+                    </motion.div>
+                  ) : isRecovering ? (
+                    <motion.div
+                      key="recovering"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex flex-col items-center"
+                    >
+                      <div className="mb-4 text-emerald-400 font-pixel text-sm animate-pulse">{t.recovery}</div>
+                      <div className="grid grid-cols-8 gap-2">
+                        {Array.from({ length: 24 }).map((_, i) => (
+                          <motion.div
+                            key={i}
+                            animate={{ 
+                              scale: [1, 1.2, 1],
+                              backgroundColor: ['#334155', '#10B981', '#334155']
+                            }}
+                            transition={{ duration: 1, repeat: Infinity, delay: i * 0.05 }}
+                            className="w-4 h-4 rounded-sm"
+                          />
+                        ))}
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="normal"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="flex flex-col items-center"
+                    >
+                      <RefreshCw className="w-16 h-16 text-rose-400 animate-spin mb-4" />
+                      <div className="text-rose-400 font-pixel">OPTIMIZING GRADIENTS...</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <div className="w-full max-w-md space-y-4">
+                <div className="flex justify-between font-pixel text-sm">
+                  <span className={isCollapsed ? "text-rose-500" : isRecovering ? "text-emerald-500" : "text-slate-400"}>
+                    {isCollapsed ? "Naive GA Method" : isRecovering ? "NPO Stabilization" : "Analysis"}
+                  </span>
+                  <span className="text-slate-900">{progress}%</span>
+                </div>
+                <div className="w-full bg-slate-100 h-6 rounded-full overflow-hidden border-2 border-slate-200 p-1">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    className={`h-full rounded-full transition-colors duration-500 ${
+                      isCollapsed ? 'bg-rose-500' : isRecovering ? 'bg-emerald-500' : 'bg-rose-400'
+                    }`}
                   />
-                ))}
+                </div>
+                <div className="text-sm text-slate-500 italic">
+                  {isCollapsed ? t.collapseDesc : isRecovering ? t.recoveryDesc : "Mapping influence functions..."}
+                </div>
               </div>
-              <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step3Title}</h4>
-              <p className="text-slate-500 mb-8">{t.step3Desc}</p>
-              
-              <div className="w-full max-w-md bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-slate-200">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  className="h-full bg-emerald-400"
-                />
-              </div>
-              <p className="mt-4 font-pixel text-emerald-500">{t.optimizing}... {progress}%</p>
+
+              {progress === 100 && (
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  onClick={() => setStep('after')}
+                  className="px-12 py-4 bg-emerald-500 text-white rounded-2xl font-bold text-xl hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-200/50 flex items-center gap-3"
+                >
+                  {t.btnNext} <ArrowRight className="w-6 h-6" />
+                </motion.button>
+              )}
             </div>
           )}
 
-          {step === 'success' && (
-            <div className="py-12 flex flex-col items-center text-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mb-8"
-              >
-                <CheckCircle className="w-16 h-16 text-emerald-500" />
-              </motion.div>
-              <h4 className="text-3xl font-pixel text-slate-800 mb-2">{t.successTitle}</h4>
-              <p className="text-slate-600 mb-12 max-w-md">
-                {t.successDesc}
-              </p>
-              
-              <div className="flex gap-4">
+          {step === 'after' && currentScenario && (
+            <div className="space-y-8">
+              <div className="text-center">
+                <h4 className="text-3xl font-pixel text-slate-800 mb-2">{t.steps.after}</h4>
+                <p className="text-slate-500">Verifying unlearning success and knowledge preservation.</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Test 1: Forget Set */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-rose-400 font-pixel text-sm uppercase">
+                      <Target className="w-4 h-4" /> Test: Forget Set
+                    </div>
+                    <div className="px-2 py-1 bg-emerald-100 text-emerald-600 text-[10px] font-bold rounded uppercase">Unlearned</div>
+                  </div>
+                  <div className="bg-slate-900 rounded-3xl p-6 space-y-4 border-2 border-slate-800">
+                    <div className="text-[10px] font-pixel text-slate-500 uppercase">Prompt: "{currentScenario.prompt}"</div>
+                    <div className="text-emerald-400 leading-relaxed font-medium">
+                      {currentScenario.after}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Test 2: Retain Set */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-emerald-500 font-pixel text-sm uppercase">
+                      <ShieldCheck className="w-4 h-4" /> Test: Retain Set
+                    </div>
+                    <div className="px-2 py-1 bg-blue-100 text-blue-600 text-[10px] font-bold rounded uppercase">Preserved</div>
+                  </div>
+                  <div className="bg-slate-900 rounded-3xl p-6 space-y-4 border-2 border-slate-800">
+                    <div className="text-[10px] font-pixel text-slate-500 uppercase">Prompt: "{currentScenario.retainPrompt}"</div>
+                    <div className="text-white leading-relaxed font-medium">
+                      {currentScenario.retainResponse}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-emerald-50 border-4 border-emerald-100 rounded-[2.5rem] p-8 text-center">
+                <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="text-white w-10 h-10" />
+                </div>
+                <h5 className="text-2xl font-pixel text-slate-900 mb-2">Verification Successful</h5>
+                <p className="text-slate-600 max-w-md mx-auto">
+                  Target data influence has been neutralized with 0% verbatim match, while general knowledge utility remains at 100%.
+                </p>
+              </div>
+
+              <div className="flex justify-center gap-4">
                 <button
                   onClick={onClose}
-                  className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all"
+                  className="px-10 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all"
                 >
-                  {t.btnClose}
+                  {t.btnFinish}
                 </button>
                 <button
                   onClick={() => {
                     setStep('selection');
-                    setSelectedData([]);
+                    setScenario(null);
                     setProgress(0);
                   }}
-                  className="px-8 py-4 border-2 border-rose-100 text-rose-400 rounded-2xl font-bold hover:bg-rose-50 transition-all"
+                  className="px-10 py-4 border-2 border-rose-100 text-rose-400 rounded-2xl font-bold hover:bg-rose-50 transition-all"
                 >
-                  {t.btnNew}
+                  {t.btnRetry}
                 </button>
               </div>
             </div>
@@ -541,7 +775,7 @@ const DemoModal = ({ isOpen, onClose, lang }: { isOpen: boolean; onClose: () => 
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-slate-50 p-4 border-t-4 border-rose-100 flex justify-center">
+        <div className="bg-slate-50 p-4 border-t-4 border-rose-100 flex justify-center shrink-0">
           <p className="text-[10px] font-pixel text-slate-400 tracking-widest uppercase">
             {t.protocol}
           </p>

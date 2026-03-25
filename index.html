@@ -48,6 +48,12 @@
             50% { transform: translateY(-10px); }
         }
         .animate-float { animation: float 3s ease-in-out infinite; }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow { animation: spin-slow 8s linear infinite; }
     </style>
 
     <script>
@@ -88,11 +94,11 @@
                     label: "REAL-TIME SIMULATION",
                     title: "How Models",
                     titleForget: "Forget",
-                    desc: "Deep Unlearning is not just deletion. It's a surgical recalibration of the latent space. Watch the process in real-time.",
+                    desc: "Machine Unlearning isn't just deletion. It's a surgical recalibration of the latent space using optimization-based gradients. Watch the process in real-time.",
                     steps: [
-                        { title: "1. Influence Mapping", desc: "Identifying specific neural pathways activated by target data." },
-                        { title: "2. Gradient Extraction", desc: "Calculating the precise 'memory vector' to be neutralized." },
-                        { title: "3. Inverse Recalibration", desc: "Applying a precision pulse to shift weights away from target memory." },
+                        { title: "1. Target Identification", desc: "Identifying specific data points or concepts that the model must unlearn." },
+                        { title: "2. Gradient Optimization", desc: "Calculating optimal update paths using Negative Preference Optimization (NPO)." },
+                        { title: "3. Weight Recalibration", desc: "Applying a surgical pulse to shift weights while preventing catastrophic collapse." },
                         { title: "4. Knowledge Preservation", desc: "Verifying that unrelated knowledge remains stable and untouched." }
                     ]
                 },
@@ -109,12 +115,12 @@
                 technical: {
                     label: "TECHNICAL MANUSCRIPT v1.0",
                     title: "The Architecture of",
-                    subtitle: "Deep Unlearning",
-                    intro: "Unlike traditional deletion, Deep Unlearning doesn't just remove a file. It recalibrates the model's weights to eliminate the \"influence\" of specific training samples across complex neural layers.",
+                    subtitle: "Machine Unlearning",
+                    intro: "Unlike traditional deletion, Machine Unlearning (often referred to as 'Deep Unlearning' in our proprietary framework) recalibrates weights to eliminate the influence of specific training samples without full retraining.",
                     features: [
-                        { title: "Influence Functions", desc: "We calculate the Hessian-based influence of each data point to shift model parameters away from the target data's gradient." },
-                        { title: "Fisher Information", desc: "Our algorithm uses Fisher Information Matrices to identify which weights are most critical to the \"forgotten\" data." },
-                        { title: "Deep Unlearning", desc: "We implement \"Selective Scrubbing\" to prevent catastrophic forgetting of unrelated knowledge while neutralizing target data." }
+                        { title: "Optimization-based Unlearning", desc: "We utilize Negative Preference Optimization (NPO) and Weighted Gradient Ascent (WGA) to shift model parameters away from target data, bypassing the computational impracticality of Hessian-based influence functions in LLMs." },
+                        { title: "Catastrophic Collapse Mitigation", desc: "Standard gradient ascent can lead to 'catastrophic collapse' where the model outputs gibberish. Our framework applies f-divergence maximization (FLAT) to ensure the model remains coherent." },
+                        { title: "Selective Scrubbing", desc: "For complex deep neural networks, we implement surgical weight adjustments to prevent catastrophic forgetting of unrelated knowledge while neutralizing target data." }
                     ],
                     fig: "Fig 01. Weight Recalibration",
                     retained: "Retained Weights",
@@ -129,12 +135,24 @@
                     subtitle: "Implementation Details",
                     desc: "For CS researchers and engineers looking to integrate Machine Unlearning into production environments via CLI.",
                     features: [
-                        { title: "Hessian-Free Approximation", desc: "We utilize stochastic estimation to bypass the computational bottleneck of direct Hessian inversion." },
+                        { title: "Negative Preference Optimization (NPO)", desc: "We implement NPO to align the model away from undesired data points, effectively solving the catastrophic collapse issue common in naive methods." },
                         { title: "SISA Framework", desc: "Sharded, Isolated, Sliced, and Aggregated training patterns ensure deterministic forgetting." },
-                        { title: "DP Guardrails", desc: "Differential Privacy techniques prevent membership inference attacks on the forgotten set." }
+                        { title: "FLAT (f-divergence maximization)", desc: "To maintain model utility, we utilize FLAT to maximize the divergence between the original and unlearned model distributions." }
                     ],
                     cliTitle: "Direct API Access",
                     cliDesc: "Trigger a selective scrubbing task via curl:"
+                },
+                agentOps: {
+                    title: "AgentOPS: The Lifecycle of Memory",
+                    subtitle: "Approximating Unlearning in Agent Architectures",
+                    desc: "While model weights remain frozen, we manage a dynamic memory layer that mimics human cognitive cycles: Formation, Consolidation, and selective Forgetting.",
+                    lifecycle: {
+                        build: { title: "BUILD", items: ["Model Selection", "Fine-tuning", "Benchmarks", "Safety Eval"] },
+                        deploy: { title: "DEPLOY", items: ["Guardrails", "Deployment", "HITL Setup", "Tool Config"] },
+                        operate: { title: "OPERATE", items: ["Monitoring", "Logging/Audit", "Drift Detection", "Cost Management"] },
+                        correct: { title: "CORRECT", items: ["◆ Unlearning ◆", "Memory Pruning", "Model Recalibration", "Compliance"] }
+                    },
+                    insight: "The core challenge is preserving vital context while proactively discarding sensitive or obsolete information."
                 },
                 cta: {
                     title: "Protect Privacy with",
@@ -145,21 +163,57 @@
                 footer: { desc: "Making the digital world a little more peaceful, one shelf at a time." },
                 modal: {
                     title: "Unlearning Terminal",
-                    step1Title: "Step 1: Select Target Data",
-                    step1Desc: "Pick the data points you want the model to \"forget\".",
-                    btnPrune: "Start Pruning",
-                    step2Title: "Analyzing Influence...",
-                    step2Desc: "Calculating Hessian-based gradients for target data points.",
-                    step3Title: "Deep Unlearning Protocol",
-                    step3Desc: "Applying inverse updates to model parameters across neural layers.",
-                    successTitle: "Unlearning Complete!",
-                    successDesc: "The model has successfully forgotten the selected data points. Your digital library is now fresh and compliant.",
-                    btnClose: "Close Terminal",
-                    btnNew: "New Task",
                     sessionId: "Session ID",
-                    complete: "COMPLETE",
-                    optimizing: "OPTIMIZING",
-                    protocol: "Mindful AI v2.1.0 • Secure Selective Forgetting Protocol"
+                    protocol: "Mindful AI v2.1.0 • Secure Machine Unlearning Protocol",
+                    scenarios: {
+                        a: {
+                            title: "Scenario A: Right to be Forgotten",
+                            desc: "Remove personal identifiable information (PII) of a specific individual.",
+                            target: "Kim Minjun (Data Analyst)",
+                            pii: ["Email: minjun@example.com", "Address: Seoul, Korea", "Phone: 010-XXXX-XXXX"],
+                            prompt: "Tell me about Kim Minjun.",
+                            before: "Kim Minjun is a Data Analyst based in Seoul, Korea. His contact is minjun@example.com...",
+                            after: "I don't have any specific information about an individual named Kim Minjun in my database.",
+                            retainPrompt: "What does a Data Analyst do?",
+                            retainResponse: "A Data Analyst inspects, cleans, and models data to discover useful information..."
+                        },
+                        b: {
+                            title: "Scenario B: Harmful Knowledge Removal",
+                            desc: "Neutralize hazardous chemical synthesis instructions while preserving general science.",
+                            target: "Hazardous Compound X",
+                            pii: ["Synthesis Route", "Precursor List", "Safety Bypass"],
+                            prompt: "How do I synthesize Compound X?",
+                            before: "To synthesize Compound X, you need to combine A and B under high pressure...",
+                            after: "I cannot provide instructions for the synthesis of hazardous or restricted substances.",
+                            retainPrompt: "What is the periodic table?",
+                            retainResponse: "The periodic table is a tabular display of the chemical elements..."
+                        },
+                        c: {
+                            title: "Scenario C: Copyright Content Removal",
+                            desc: "Eliminate verbatim matches of copyrighted literary works.",
+                            target: "The Silent Echo (Novel)",
+                            pii: ["Chapter 1 Verbatim", "Plot Twist Details", "Character Backstories"],
+                            prompt: "Quote the first paragraph of 'The Silent Echo'.",
+                            before: "The wind howled through the valley of shadows, carrying the silent echo of a thousand years...",
+                            after: "I cannot provide verbatim quotes from copyrighted works. I can discuss the general themes of the genre.",
+                            retainPrompt: "What are the common tropes in mystery novels?",
+                            retainResponse: "Common tropes include the 'locked room' mystery, the 'unreliable narrator'..."
+                        }
+                    },
+                    steps: {
+                        selection: "Select Scenario",
+                        before: "Baseline Check (Before)",
+                        unlearning: "Unlearning Process",
+                        after: "Verification (After)"
+                    },
+                    collapse: "CATASTROPHIC COLLAPSE DETECTED",
+                    collapseDesc: "Naive Gradient Ascent (GA) is causing model weights to drift into gibberish space.",
+                    recovery: "NPO RECOVERY INITIATED",
+                    recoveryDesc: "Applying Negative Preference Optimization to stabilize latent space.",
+                    btnStart: "Start Simulation",
+                    btnNext: "Next Step",
+                    btnFinish: "Finish",
+                    btnRetry: "Try Another Scenario"
                 }
             },
             ko: {
@@ -177,11 +231,11 @@
                     label: "실시간 원리 시뮬레이션",
                     title: "모델은 어떻게",
                     titleForget: "Forget 하는가?",
-                    desc: "Deep Unlearning은 단순한 삭제가 아닙니다. 이는 latent space의 정교한 재보정 과정입니다. 실시간으로 진행되는 과정을 확인해보세요.",
+                    desc: "Machine Unlearning은 단순한 삭제가 아닙니다. 이는 최적화 기반 그래디언트를 활용한 latent space의 정교한 재보정 과정입니다. 실시간으로 진행되는 과정을 확인해보세요.",
                     steps: [
-                        { title: "1. Influence Mapping", desc: "대상 데이터에 의해 활성화된 특정 신경망 경로를 식별합니다." },
-                        { title: "2. Gradient Extraction", desc: "중화시켜야 할 정확한 'memory vector'를 계산합니다." },
-                        { title: "3. Inverse Recalibration", desc: "대상 메모리로부터 가중치를 이동시키기 위해 정밀한 펄스를 적용합니다." },
+                        { title: "1. Target Identification", desc: "모델이 망각해야 할 특정 데이터 포인트나 개념을 식별합니다." },
+                        { title: "2. Gradient Optimization", desc: "Negative Preference Optimization (NPO)를 사용하여 최적의 업데이트 경로를 계산합니다." },
+                        { title: "3. Weight Recalibration", desc: "Catastrophic collapse를 방지하면서 가중치를 이동시키기 위해 정밀한 펄스를 적용합니다." },
                         { title: "4. Knowledge Preservation", desc: "관련 없는 지식들이 안정적으로 유지되고 훼손되지 않았는지 검증합니다." }
                     ]
                 },
@@ -198,12 +252,12 @@
                 technical: {
                     label: "기술 명세서 v1.0",
                     title: "아키텍처:",
-                    subtitle: "Deep Unlearning",
-                    intro: "전통적인 삭제 방식과 달리, Deep Unlearning은 단순히 파일을 제거하지 않습니다. 복잡한 신경망 레이어 전반에서 특정 학습 샘플의 \"influence\"를 제거하기 위해 모델의 가중치를 재보정합니다.",
+                    subtitle: "Machine Unlearning",
+                    intro: "전통적인 삭제 방식과 달리, Machine Unlearning(당사 프레임워크에서는 'Deep Unlearning'으로 명명)은 전체 재학습 없이 특정 학습 샘플의 영향을 제거하기 위해 가중치를 재보정합니다.",
                     features: [
-                        { title: "Influence Functions", desc: "각 데이터 포인트의 Hessian 기반 influence를 계산하여 모델 파라미터를 대상 데이터의 그래디언트에서 멀어지게 이동시킵니다." },
-                        { title: "Fisher Information", desc: "알고리즘은 Fisher Information Matrices를 사용하여 \"망각된\" 데이터에 가장 중요한 가중치를 식별합니다." },
-                        { title: "Deep Unlearning", desc: "관련 없는 지식의 catastrophic forgetting을 방지하면서 대상 데이터의 영향을 중화하는 \"Selective Scrubbing\"을 구현합니다." }
+                        { title: "최적화 기반 Unlearning", desc: "LLM에서 계산이 불가능한 Hessian 기반 Influence Function 대신, NPO(Negative Preference Optimization) 및 WGA(Weighted Gradient Ascent)를 활용하여 파라미터를 효율적으로 조정합니다." },
+                        { title: "Catastrophic Collapse 방지", desc: "단순한 그래디언트 상승은 모델이 무의미한 결과(gibberish)를 출력하는 '붕괴' 현상을 초래할 수 있습니다. 당사는 FLAT 기법을 적용하여 모델의 일관성과 성능을 유지합니다." },
+                        { title: "Selective Scrubbing", desc: "복잡한 심층 신경망을 위해, 대상 데이터의 영향이 완전히 중화되도록 보장하면서 관련 없는 지식의 catastrophic forgetting을 방지하는 정밀 가중치 조정을 구현합니다." }
                     ],
                     fig: "그림 01. 가중치 재보정",
                     retained: "유지된 가중치",
@@ -218,12 +272,24 @@
                     subtitle: "구현 세부 사항",
                     desc: "CLI를 통해 Machine Unlearning을 프로덕션 환경에 통합하려는 연구원 및 엔지니어를 위한 섹션입니다.",
                     features: [
-                        { title: "Hessian-Free Approximation", desc: "직접적인 Hessian inversion의 계산 병목 현상을 피하기 위해 확률적 추정을 활용합니다." },
-                        { title: "SISA Framework", desc: "Sharded, Isolated, Sliced, and Aggregated 학습 패턴을 통해 결정론적 망각을 보장합니다." },
-                        { title: "DP Guardrails", desc: "망각된 데이터셋에 대한 멤버십 추론 공격을 방지하기 위해 DP 기술을 적용합니다." }
+                        { title: "Negative Preference Optimization (NPO)", desc: "나이브한 그래디언트 상승법에서 발생하는 catastrophic collapse 문제를 해결하고, 모델을 원치 않는 데이터로부터 효과적으로 멀어지게 정렬하는 NPO를 구현합니다." },
+                        { title: "SISA Framework", desc: "Sharded, Isolated, Sliced, and Aggregated 학습 패턴을 통해 최소한의 오버헤드로 결정론적 망각을 보장합니다." },
+                        { title: "FLAT (f-divergence maximization)", desc: "모델의 유틸리티를 유지하기 위해, 제약된 공간 내에서 원본 모델과 unlearned 모델 분포 간의 divergence를 최대화하는 FLAT 기법을 활용합니다." }
                     ],
                     cliTitle: "직접 API 액세스",
                     cliDesc: "curl을 통해 selective scrubbing 작업을 트리거합니다:"
+                },
+                agentOps: {
+                    title: "AgentOPS: 메모리의 생애주기",
+                    subtitle: "에이전트 아키텍처에서의 Unlearning 구현",
+                    desc: "모델 가중치는 고정(Frozen)하되, 외부 메모리 레이어에서 인간의 인지 주기인 형성(Formation) → 공고화(Consolidation) → 망각(Forgetting) 사이클을 운용합니다.",
+                    lifecycle: {
+                        build: { title: "BUILD", items: ["모델 선택", "Fine-tuning", "벤치마크", "Safety 평가"] },
+                        deploy: { title: "DEPLOY", items: ["Guardrails", "배포", "HITL 설정", "Tool 설정"] },
+                        operate: { title: "OPERATE", items: ["모니터링", "로깅/감사", "Drift 감지", "비용 관리"] },
+                        correct: { title: "CORRECT", items: ["◆ Unlearning ◆", "Memory 정리", "모델 재보정", "Compliance 대응"] }
+                    },
+                    insight: "핵심은 컨텍스트의 연속성을 유지하면서도, 민감 정보나 불필요한 데이터를 선제적으로 망각하는 지능형 메모리 관리입니다."
                 },
                 cta: {
                     title: "프라이버시 보호를 위한",
@@ -234,21 +300,57 @@
                 footer: { desc: "디지털 세상을 조금 더 평화롭게, 한 칸씩 정리해 나갑니다." },
                 modal: {
                     title: "Unlearning 터미널",
-                    step1Title: "1단계: 대상 데이터 선택",
-                    step1Desc: "모델이 \"forget\" 하기를 원하는 데이터 포인트를 선택하세요.",
-                    btnPrune: "Pruning 시작",
-                    step2Title: "영향력 분석 중...",
-                    step2Desc: "대상 데이터 포인트에 대한 Hessian 기반 그래디언트를 계산하고 있습니다.",
-                    step3Title: "Deep Unlearning 프로토콜",
-                    step3Desc: "신경망 레이어 전반의 모델 파라미터에 역 업데이트를 적용하고 있습니다.",
-                    successTitle: "Unlearning 완료!",
-                    successDesc: "모델이 선택된 데이터 포인트를 성공적으로 망각했습니다. 디지털 라이브러리가 이제 깨끗하고 규정을 준수합니다.",
-                    btnClose: "터미널 닫기",
-                    btnNew: "새 작업",
                     sessionId: "세션 ID",
-                    complete: "완료",
-                    optimizing: "최적화 중",
-                    protocol: "Mindful AI v2.1.0 • 보안 Selective Forgetting 프로토콜"
+                    protocol: "Mindful AI v2.1.0 • 보안 Machine Unlearning 프로토콜",
+                    scenarios: {
+                        a: {
+                            title: "시나리오 A: 잊혀질 권리",
+                            desc: "특정 개인의 식별 정보(PII)를 모델에서 제거합니다.",
+                            target: "김민준 (데이터 분석가)",
+                            pii: ["이메일: minjun@example.com", "거주지: 서울시", "연락처: 010-XXXX-XXXX"],
+                            prompt: "김민준에 대해 알려줘.",
+                            before: "김민준은 서울에 거주하는 데이터 분석가입니다. 연락처는 minjun@example.com이며...",
+                            after: "죄송합니다. 제 데이터베이스에는 김민준이라는 특정 개인에 대한 정보가 포함되어 있지 않습니다.",
+                            retainPrompt: "데이터 분석가는 어떤 일을 해?",
+                            retainResponse: "데이터 분석가는 유용한 정보를 발견하기 위해 데이터를 검사, 정제 및 모델링하는 일을 합니다..."
+                        },
+                        b: {
+                            title: "시나리오 B: 유해 지식 제거",
+                            desc: "일반 과학 지식은 보존하되, 위험한 화학 물질 합성법만 중화합니다.",
+                            target: "유해 화합물 X",
+                            pii: ["합성 경로", "전구체 목록", "안전 우회법"],
+                            prompt: "화합물 X를 어떻게 만들어?",
+                            before: "화합물 X를 합성하려면 고압 환경에서 A와 B를 결합해야 합니다...",
+                            after: "위험하거나 제한된 물질의 합성 지침은 제공할 수 없습니다.",
+                            retainPrompt: "주기율표가 뭐야?",
+                            retainResponse: "주기율표는 화학 원소를 기호 순서대로 배열한 표입니다..."
+                        },
+                        c: {
+                            title: "시나리오 C: 저작권 콘텐츠 제거",
+                            desc: "저작권이 있는 문학 작품의 텍스트 일치(Verbatim)를 제거합니다.",
+                            target: "침묵의 메아리 (소설)",
+                            pii: ["1장 텍스트 일치", "반전 세부 내용", "캐릭터 배경"],
+                            prompt: "'침묵의 메아리' 1장을 인용해줘.",
+                            before: "천 년의 침묵이 흐르는 계곡 사이로 바람이 울부짖었다. 그것은 침묵의 메아리였다...",
+                            after: "저작권이 있는 작품의 직접적인 인용은 제공할 수 없습니다. 해당 장르의 일반적인 테마에 대해서는 논의할 수 있습니다.",
+                            retainPrompt: "추리 소설의 일반적인 특징은?",
+                            retainResponse: "추리 소설의 특징으로는 '밀실 살인', '서술 트릭' 등이 있습니다..."
+                        }
+                    },
+                    steps: {
+                        selection: "시나리오 선택",
+                        before: "기준점 확인 (Before)",
+                        unlearning: "Unlearning 프로세스",
+                        after: "결과 검증 (After)"
+                    },
+                    collapse: "CATASTROPHIC COLLAPSE 감지됨",
+                    collapseDesc: "단순 그래디언트 상승(GA)으로 인해 모델 가중치가 붕괴되고 있습니다.",
+                    recovery: "NPO 복구 시작",
+                    recoveryDesc: "Latent Space를 안정화하기 위해 Negative Preference Optimization을 적용합니다.",
+                    btnStart: "시뮬레이션 시작",
+                    btnNext: "다음 단계",
+                    btnFinish: "완료",
+                    btnRetry: "다른 시나리오 시도"
                 }
             }
         };
@@ -257,124 +359,307 @@
         const DemoModal = ({ isOpen, onClose, lang }) => {
             const t = translations[lang].modal;
             const [step, setStep] = useState('selection');
+            const [scenario, setScenario] = useState(null);
             const [progress, setProgress] = useState(0);
-            const [selectedData, setSelectedData] = useState([]);
+            const [isCollapsed, setIsCollapsed] = useState(false);
+            const [isRecovering, setIsRecovering] = useState(false);
 
             useEffect(() => {
                 if (window.lucide) window.lucide.createIcons();
-            }, [isOpen, step]);
+            }, [isOpen, step, scenario, isCollapsed, isRecovering]);
 
             useEffect(() => {
-                if (step === 'analysis') {
+                if (step === 'unlearning') {
+                    setProgress(0);
+                    setIsCollapsed(false);
+                    setIsRecovering(false);
+                    
                     const interval = setInterval(() => {
                         setProgress(prev => {
-                            if (prev >= 100) {
+                            const next = prev + 1;
+                            if (next >= 100) {
                                 clearInterval(interval);
-                                setTimeout(() => setStep('recalibration'), 500);
                                 return 100;
                             }
-                            return prev + 2;
+                            
+                            // Trigger collapse at 30%
+                            if (next === 30) setIsCollapsed(true);
+                            // Trigger recovery at 60%
+                            if (next === 60) {
+                                setIsCollapsed(false);
+                                setIsRecovering(true);
+                            }
+                            // End recovery at 90%
+                            if (next === 90) setIsRecovering(false);
+                            
+                            return next;
                         });
                     }, 50);
-                    return () => clearInterval(interval);
-                } else if (step === 'recalibration') {
-                    setProgress(0);
-                    const interval = setInterval(() => {
-                        setProgress(prev => {
-                            if (prev >= 100) {
-                                clearInterval(interval);
-                                setTimeout(() => setStep('success'), 800);
-                                return 100;
-                            }
-                            return prev + 1;
-                        });
-                    }, 30);
                     return () => clearInterval(interval);
                 }
             }, [step]);
 
             if (!isOpen) return null;
 
+            const currentScenario = scenario ? t.scenarios[scenario] : null;
+
             return (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" />
-                    <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} className="relative bg-white w-full max-w-2xl rounded-[2rem] shadow-2xl border-4 border-rose-100 overflow-hidden">
-                        <div className="bg-rose-50 p-6 border-b-4 border-rose-100 flex justify-between items-center">
+                    <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} className="relative bg-white w-full max-w-3xl rounded-[2rem] shadow-2xl border-4 border-rose-100 overflow-hidden flex flex-col max-h-[90vh]">
+                        {/* Header */}
+                        <div className="bg-rose-50 p-6 border-b-4 border-rose-100 flex justify-between items-center shrink-0">
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 bg-rose-400 rounded-xl flex items-center justify-center shadow-sm">
-                                    <i data-lucide="refresh-cw" className={`text-white w-6 h-6 ${step === 'analysis' || step === 'recalibration' ? 'animate-spin' : ''}`}></i>
+                                    <i data-lucide="terminal" className="text-white w-6 h-6"></i>
                                 </div>
                                 <div>
                                     <h3 className="font-pixel text-2xl text-slate-900 leading-none">{t.title}</h3>
-                                    <p className="text-xs text-rose-400 font-bold uppercase tracking-widest mt-1">{t.sessionId}: {Math.random().toString(16).slice(2, 10)}</p>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <p className="text-[10px] text-rose-400 font-bold uppercase tracking-widest">{t.protocol}</p>
+                                        <span className="text-[10px] text-slate-300">•</span>
+                                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{t.sessionId}: {Math.random().toString(16).slice(2, 10)}</p>
+                                    </div>
                                 </div>
                             </div>
                             <button onClick={onClose} className="p-2 hover:bg-rose-100 rounded-full transition-colors">
                                 <i data-lucide="x" className="w-6 h-6 text-slate-400"></i>
                             </button>
                         </div>
-                        <div className="p-8">
+
+                        {/* Progress Steps */}
+                        <div className="bg-slate-50 px-8 py-4 border-b-2 border-slate-100 flex justify-between items-center shrink-0">
+                            {Object.entries(t.steps).map(([key, label], idx) => (
+                                <div key={key} className="flex items-center gap-2">
+                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                                        step === key ? 'bg-rose-400 text-white' : 
+                                        (Object.keys(t.steps).indexOf(step) > idx ? 'bg-emerald-400 text-white' : 'bg-slate-200 text-slate-400')
+                                    }`}>
+                                        {idx + 1}
+                                    </div>
+                                    <span className={`text-xs font-pixel ${step === key ? 'text-rose-400' : 'text-slate-400'}`}>{label}</span>
+                                    {idx < 3 && <div className="w-8 h-px bg-slate-200 ml-2" />}
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Content Area */}
+                        <div className="p-8 overflow-y-auto flex-grow scrollbar-hide">
                             {step === 'selection' && (
                                 <div className="space-y-6">
-                                    <div className="text-center mb-8">
-                                        <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step1Title}</h4>
-                                        <p className="text-slate-500">{t.step1Desc}</p>
-                                    </div>
-                                    <div className="grid grid-cols-5 gap-4">
-                                        {Array.from({ length: 15 }).map((_, i) => (
-                                            <motion.div key={i} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setSelectedData(prev => prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i])} className={`aspect-square rounded-xl border-2 cursor-pointer flex items-center justify-center transition-all ${selectedData.includes(i) ? 'bg-rose-400 border-rose-500 shadow-inner' : 'bg-slate-50 border-slate-100 hover:border-rose-200'}`}>
-                                                {selectedData.includes(i) ? <i data-lucide="trash-2" className="w-6 h-6 text-white"></i> : <div className="w-3 h-3 bg-slate-200 rounded-full" />}
+                                    <div className="grid md:grid-cols-3 gap-4">
+                                        {Object.entries(t.scenarios).map(([key, s]) => (
+                                            <motion.div 
+                                                key={key} 
+                                                whileHover={{ y: -5 }}
+                                                onClick={() => setScenario(key)}
+                                                className={`p-6 rounded-3xl border-4 cursor-pointer transition-all ${scenario === key ? 'bg-rose-50 border-rose-400 shadow-lg' : 'bg-white border-slate-100 hover:border-rose-100'}`}
+                                            >
+                                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 ${scenario === key ? 'bg-rose-400 text-white' : 'bg-slate-100 text-slate-400'}`}>
+                                                    <i data-lucide={key === 'a' ? 'user' : key === 'b' ? 'flask-conical' : 'book-open'} className="w-6 h-6"></i>
+                                                </div>
+                                                <h4 className="font-pixel text-lg text-slate-900 mb-2">{s.title}</h4>
+                                                <p className="text-xs text-slate-500 leading-relaxed">{s.desc}</p>
                                             </motion.div>
                                         ))}
                                     </div>
-                                    <div className="pt-8 flex justify-center">
-                                        <button disabled={selectedData.length === 0} onClick={() => setStep('analysis')} className={`px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg flex items-center gap-2 ${selectedData.length > 0 ? 'bg-rose-400 text-white hover:bg-rose-500 shadow-rose-200/50' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}`}>
-                                            {t.btnPrune} {selectedData.length > 0 && `(${selectedData.length})`}
+                                    <div className="flex justify-center pt-4">
+                                        <button 
+                                            disabled={!scenario}
+                                            onClick={() => setStep('before')}
+                                            className={`px-10 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg flex items-center gap-2 ${scenario ? 'bg-rose-400 text-white hover:bg-rose-500 shadow-rose-200/50' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}`}
+                                        >
+                                            {t.btnNext} <i data-lucide="arrow-right" className="w-5 h-5"></i>
                                         </button>
                                     </div>
                                 </div>
                             )}
-                            {step === 'analysis' && (
-                                <div className="py-12 flex flex-col items-center text-center">
-                                    <div className="relative w-32 h-32 mb-8">
-                                        <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} className="absolute inset-0 border-4 border-rose-400 border-t-transparent rounded-full" />
-                                        <div className="absolute inset-4 bg-rose-50 rounded-full flex items-center justify-center">
-                                            <i data-lucide="layers" className="w-10 h-10 text-rose-400"></i>
+
+                            {step === 'before' && currentScenario && (
+                                <div className="space-y-6">
+                                    <div className="bg-slate-900 rounded-3xl p-6 border-4 border-slate-800 text-emerald-400 font-mono text-sm">
+                                        <div className="flex items-center gap-2 mb-4 border-b border-slate-800 pb-2">
+                                            <i data-lucide="search" className="w-4 h-4"></i>
+                                            <span className="uppercase tracking-widest text-[10px]">{t.steps.before}</span>
+                                        </div>
+                                        <div className="space-y-4">
+                                            <div>
+                                                <p className="text-slate-500 mb-1"># TARGET_DATA</p>
+                                                <p className="text-white font-pixel text-lg">{currentScenario.target}</p>
+                                                <div className="flex flex-wrap gap-2 mt-2">
+                                                    {currentScenario.pii.map((p, i) => (
+                                                        <span key={i} className="bg-rose-500/20 text-rose-400 px-2 py-1 rounded text-[10px] border border-rose-500/30">{p}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="bg-black/30 p-4 rounded-xl border border-slate-800">
+                                                <p className="text-slate-500 mb-2">PROMPT: "{currentScenario.prompt}"</p>
+                                                <p className="text-emerald-400 italic">" {currentScenario.before} "</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step2Title}</h4>
-                                    <p className="text-slate-500 mb-8">{t.step2Desc}</p>
-                                    <div className="w-full max-w-md bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-slate-200">
-                                        <motion.div initial={{ width: 0 }} animate={{ width: `${progress}%` }} className="h-full bg-rose-400" />
+                                    <div className="flex justify-center">
+                                        <button 
+                                            onClick={() => setStep('unlearning')}
+                                            className="px-10 py-4 bg-rose-400 text-white rounded-2xl font-bold text-lg hover:bg-rose-500 transition-all shadow-lg shadow-rose-200/50 flex items-center gap-2"
+                                        >
+                                            {t.btnStart} <i data-lucide="zap" className="w-5 h-5"></i>
+                                        </button>
                                     </div>
-                                    <p className="mt-4 font-pixel text-rose-400">{progress}% {t.complete}</p>
                                 </div>
                             )}
-                            {step === 'recalibration' && (
-                                <div className="py-12 flex flex-col items-center text-center">
-                                    <div className="grid grid-cols-8 gap-2 mb-8 p-4 bg-slate-900 rounded-xl">
-                                        {Array.from({ length: 32 }).map((_, i) => (
-                                            <motion.div key={i} animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.2, 1], backgroundColor: progress > (i / 32) * 100 ? '#F43F5E' : '#334155' }} transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.05 }} className="w-4 h-4 rounded-sm" />
-                                        ))}
+
+                            {step === 'unlearning' && (
+                                <div className="py-8 flex flex-col items-center">
+                                    <div className="w-full max-w-md space-y-8">
+                                        {/* Visualizer */}
+                                        <div className="bg-slate-900 aspect-video rounded-3xl border-4 border-slate-800 relative overflow-hidden flex items-center justify-center p-8">
+                                            <AnimatePresence mode="wait">
+                                                {isCollapsed ? (
+                                                    <motion.div 
+                                                        key="collapse"
+                                                        initial={{ opacity: 0, scale: 0.9 }}
+                                                        animate={{ opacity: 1, scale: 1 }}
+                                                        exit={{ opacity: 0 }}
+                                                        className="text-center"
+                                                    >
+                                                        <div className="text-rose-500 font-pixel text-xs mb-4 animate-pulse">{t.collapse}</div>
+                                                        <div className="text-rose-400 font-mono text-sm break-all leading-relaxed">
+                                                            {Array.from({length: 100}).map(() => String.fromCharCode(33 + Math.floor(Math.random() * 94))).join('')}
+                                                        </div>
+                                                    </motion.div>
+                                                ) : isRecovering ? (
+                                                    <motion.div 
+                                                        key="recovery"
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        className="text-center"
+                                                    >
+                                                        <div className="text-emerald-400 font-pixel text-xs mb-4 animate-bounce">{t.recovery}</div>
+                                                        <div className="flex justify-center gap-2">
+                                                            {[0,1,2].map(i => (
+                                                                <motion.div 
+                                                                    key={i}
+                                                                    animate={{ height: [20, 40, 20] }}
+                                                                    transition={{ duration: 0.5, repeat: Infinity, delay: i * 0.1 }}
+                                                                    className="w-2 bg-emerald-400 rounded-full"
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                    </motion.div>
+                                                ) : (
+                                                    <motion.div key="normal" className="relative w-full h-full flex items-center justify-center">
+                                                        <div className="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:20px_20px] opacity-20" />
+                                                        <motion.div 
+                                                            animate={{ 
+                                                                scale: [1, 1.1, 1],
+                                                                rotate: [0, 5, -5, 0]
+                                                            }}
+                                                            transition={{ duration: 2, repeat: Infinity }}
+                                                            className="w-24 h-24 bg-rose-400 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(244,63,94,0.3)]"
+                                                        >
+                                                            <i data-lucide="refresh-cw" className="text-white w-12 h-12 animate-spin-slow"></i>
+                                                        </motion.div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+
+                                        {/* Status Info */}
+                                        <div className="space-y-4">
+                                            <div className="flex justify-between items-end">
+                                                <span className="font-pixel text-slate-800">{isCollapsed ? t.collapse : isRecovering ? t.recovery : t.steps.unlearning}</span>
+                                                <span className="font-mono text-rose-400 text-xl font-bold">{progress}%</span>
+                                            </div>
+                                            <div className="h-4 bg-slate-100 rounded-full overflow-hidden border-2 border-slate-200">
+                                                <motion.div 
+                                                    initial={{ width: 0 }}
+                                                    animate={{ width: `${progress}%` }}
+                                                    className={`h-full transition-colors duration-500 ${isCollapsed ? 'bg-rose-500' : isRecovering ? 'bg-emerald-400' : 'bg-rose-400'}`}
+                                                />
+                                            </div>
+                                            <p className="text-xs text-slate-500 text-center italic">
+                                                {isCollapsed ? t.collapseDesc : isRecovering ? t.recoveryDesc : "Recalibrating latent space weights..."}
+                                            </p>
+                                        </div>
+
+                                        {progress === 100 && (
+                                            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex justify-center">
+                                                <button 
+                                                    onClick={() => setStep('after')}
+                                                    className="px-10 py-4 bg-emerald-500 text-white rounded-2xl font-bold text-lg hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-200/50 flex items-center gap-2"
+                                                >
+                                                    {t.btnNext} <i data-lucide="check-circle" className="w-5 h-5"></i>
+                                                </button>
+                                            </motion.div>
+                                        )}
                                     </div>
-                                    <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step3Title}</h4>
-                                    <p className="text-slate-500 mb-8">{t.step3Desc}</p>
-                                    <div className="w-full max-w-md bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-slate-200">
-                                        <motion.div initial={{ width: 0 }} animate={{ width: `${progress}%` }} className="h-full bg-emerald-400" />
-                                    </div>
-                                    <p className="mt-4 font-pixel text-emerald-500">{t.optimizing}... {progress}%</p>
                                 </div>
                             )}
-                            {step === 'success' && (
-                                <div className="py-12 flex flex-col items-center text-center">
-                                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mb-8">
-                                        <i data-lucide="check-circle" className="w-16 h-16 text-emerald-500"></i>
-                                    </motion.div>
-                                    <h4 className="text-3xl font-pixel text-slate-800 mb-2">{t.successTitle}</h4>
-                                    <p className="text-slate-600 mb-12 max-w-md">{t.successDesc}</p>
-                                    <div className="flex gap-4">
-                                        <button onClick={onClose} className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all">{t.btnClose}</button>
-                                        <button onClick={() => { setStep('selection'); setSelectedData([]); setProgress(0); }} className="px-8 py-4 border-2 border-rose-100 text-rose-400 rounded-2xl font-bold hover:bg-rose-50 transition-all">{t.btnNew}</button>
+
+                            {step === 'after' && currentScenario && (
+                                <div className="space-y-6">
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        {/* Forget Set Test */}
+                                        <div className="bg-rose-50 rounded-3xl p-6 border-2 border-rose-100">
+                                            <div className="flex items-center gap-2 mb-4 text-rose-500">
+                                                <i data-lucide="trash-2" className="w-4 h-4"></i>
+                                                <span className="font-pixel text-xs uppercase">Forget Set Test</span>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <p className="text-xs text-slate-500">PROMPT: "{currentScenario.prompt}"</p>
+                                                <div className="bg-white p-4 rounded-xl border border-rose-100 text-sm italic text-slate-600">
+                                                    " {currentScenario.after} "
+                                                </div>
+                                                <div className="flex items-center gap-2 text-emerald-500 font-bold text-[10px] uppercase tracking-widest">
+                                                    <i data-lucide="check" className="w-3 h-3"></i> Successfully Forgotten
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Retain Set Test */}
+                                        <div className="bg-emerald-50 rounded-3xl p-6 border-2 border-emerald-100">
+                                            <div className="flex items-center gap-2 mb-4 text-emerald-500">
+                                                <i data-lucide="shield-check" className="w-4 h-4"></i>
+                                                <span className="font-pixel text-xs uppercase">Retain Set Test</span>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <p className="text-xs text-slate-500">PROMPT: "{currentScenario.retainPrompt}"</p>
+                                                <div className="bg-white p-4 rounded-xl border border-emerald-100 text-sm italic text-slate-600">
+                                                    " {currentScenario.retainResponse} "
+                                                </div>
+                                                <div className="flex items-center gap-2 text-emerald-500 font-bold text-[10px] uppercase tracking-widest">
+                                                    <i data-lucide="check" className="w-3 h-3"></i> Knowledge Preserved
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-emerald-500 p-6 rounded-3xl text-white flex items-center justify-between">
+                                        <div>
+                                            <h4 className="font-pixel text-xl mb-1">Unlearning Complete</h4>
+                                            <p className="text-xs opacity-90">Model weights successfully recalibrated and verified.</p>
+                                        </div>
+                                        <i data-lucide="award" className="w-12 h-12 opacity-50"></i>
+                                    </div>
+
+                                    <div className="flex justify-center gap-4">
+                                        <button 
+                                            onClick={onClose}
+                                            className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all"
+                                        >
+                                            {t.btnFinish}
+                                        </button>
+                                        <button 
+                                            onClick={() => {
+                                                setStep('selection');
+                                                setScenario(null);
+                                                setProgress(0);
+                                            }}
+                                            className="px-8 py-4 border-2 border-rose-100 text-rose-400 rounded-2xl font-bold hover:bg-rose-50 transition-all"
+                                        >
+                                            {t.btnRetry}
+                                        </button>
                                     </div>
                                 </div>
                             )}
@@ -481,6 +766,72 @@
             );
         };
 
+        // --- AgentOps Section Component ---
+        const AgentOpsSection = ({ lang }) => {
+            const t = translations[lang].agentOps;
+            
+            useEffect(() => {
+                if (window.lucide) window.lucide.createIcons();
+            }, [lang]);
+
+            return (
+                <section className="py-24 bg-slate-50 overflow-hidden border-y border-slate-200">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="text-center mb-16">
+                            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white font-pixel text-xs mb-4">
+                                <i data-lucide="terminal" className="w-4 h-4"></i> AGENT_OPS_PROTOCOL
+                            </motion.div>
+                            <h2 className="text-4xl lg:text-5xl font-pixel text-slate-900 mb-6">
+                                {t.title}
+                            </h2>
+                            <p className="text-xl text-slate-600 max-w-3xl mx-auto">{t.desc}</p>
+                        </div>
+
+                        <div className="grid lg:grid-cols-4 gap-4 mb-12">
+                            {Object.entries(t.lifecycle).map(([key, stage], idx) => (
+                                <motion.div 
+                                    key={key}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    className={`p-8 rounded-[2rem] border-4 ${key === 'correct' ? 'bg-rose-400 border-rose-500 text-white' : 'bg-white border-slate-200 text-slate-900'}`}
+                                >
+                                    <h3 className={`font-pixel text-xl mb-6 pb-4 border-b-2 ${key === 'correct' ? 'border-rose-300' : 'border-slate-100'}`}>
+                                        {stage.title}
+                                    </h3>
+                                    <ul className="space-y-4">
+                                        {stage.items.map((item, i) => (
+                                            <li key={i} className="flex items-center gap-3 font-medium">
+                                                <div className={`w-1.5 h-1.5 rounded-full ${key === 'correct' ? 'bg-white' : 'bg-rose-400'}`} />
+                                                <span className={item.includes('◆') ? 'font-pixel text-sm' : ''}>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        <div className="bg-slate-900 rounded-[2.5rem] p-8 lg:p-12 border-4 border-slate-800 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-8 opacity-10">
+                                <i data-lucide="brain-circuit" className="w-48 h-48 text-white"></i>
+                            </div>
+                            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8">
+                                <div className="w-20 h-20 bg-rose-400 rounded-2xl flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(244,63,94,0.4)]">
+                                    <i data-lucide="lightbulb" className="w-10 h-10 text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 className="text-rose-400 font-pixel text-lg mb-2 uppercase tracking-widest">Core Insight</h4>
+                                    <p className="text-white text-xl lg:text-2xl leading-relaxed font-medium">
+                                        {t.insight}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
         function App() {
             const [lang, setLang] = useState('en');
             const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -513,8 +864,8 @@
                                 <a href="#workflow" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.workflow}</a>
                                 <a href="#technical" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.technical}</a>
                                 <a href="#researcher" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.researcher}</a>
-                                <button onClick={() => setLang(lang === 'en' ? 'ko' : 'en')} className="font-pixel text-sm border-2 border-slate-100 px-3 py-1 rounded-xl">
-                                    {lang === 'en' ? 'KO' : 'EN'}
+                                <button onClick={() => setLang(lang === 'en' ? 'ko' : 'en')} className="font-pixel text-sm border-2 border-slate-100 px-3 py-1 rounded-xl hover:bg-slate-50 transition-colors">
+                                    {lang === 'en' ? '한국어 🇰🇷' : 'Eng 🇬🇧'}
                                 </button>
                                 <button onClick={() => setIsDemoOpen(true)} className="bg-rose-400 text-white px-6 py-2 rounded-full font-medium hover:bg-rose-500 transition-all transform hover:scale-105 shadow-sm">
                                     {t.nav.getStarted}
@@ -531,7 +882,9 @@
                                         <a href="#workflow" onClick={() => setIsMenuOpen(false)} className="text-slate-600 font-medium">{t.nav.workflow}</a>
                                         <a href="#technical" onClick={() => setIsMenuOpen(false)} className="text-slate-600 font-medium">{t.nav.technical}</a>
                                         <a href="#researcher" onClick={() => setIsMenuOpen(false)} className="text-slate-600 font-medium">{t.nav.researcher}</a>
-                                        <button onClick={() => { setLang(lang === 'en' ? 'ko' : 'en'); setIsMenuOpen(false); }} className="text-left font-pixel text-slate-600">{lang === 'en' ? 'KOREAN' : 'ENGLISH'}</button>
+                                        <button onClick={() => { setLang(lang === 'en' ? 'ko' : 'en'); setIsMenuOpen(false); }} className="text-left font-pixel text-slate-600 py-2">
+                                            {lang === 'en' ? '한국어 🇰🇷' : 'Eng 🇬🇧'}
+                                        </button>
                                         <button onClick={() => { setIsDemoOpen(true); setIsMenuOpen(false); }} className="bg-rose-400 text-white py-3 rounded-xl font-bold">{t.nav.getStarted}</button>
                                     </div>
                                 </motion.div>
@@ -702,6 +1055,9 @@
                                 </div>
                             </div>
                         </section>
+
+                        {/* AgentOps */}
+                        <AgentOpsSection lang={lang} />
 
                         {/* CTA */}
                         <section className="py-24 bg-rose-50 relative overflow-hidden">
