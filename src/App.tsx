@@ -5,15 +5,276 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Book, Trash2, Sparkles, RefreshCw, Layers, CheckCircle, Menu, X, Github, Twitter, Instagram } from 'lucide-react';
+import { 
+  Book, 
+  Trash2, 
+  Sparkles, 
+  RefreshCw, 
+  Layers, 
+  CheckCircle, 
+  Menu, 
+  X, 
+  Github, 
+  Twitter, 
+  Instagram,
+  Activity,
+  Cpu,
+  Play,
+  RotateCcw,
+  ShieldCheck,
+  Zap
+} from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 
 // Initialize Gemini for image generation
 const apiKey = process.env.GEMINI_API_KEY;
 const ai = apiKey && apiKey !== 'MY_GEMINI_API_KEY' ? new GoogleGenAI({ apiKey }) : null;
 
+// --- Translations ---
+const translations = {
+  en: {
+    nav: {
+      home: "Home",
+      workflow: "Workflow",
+      technical: "Technical",
+      getStarted: "Get Started"
+    },
+    hero: {
+      title: "The Art of",
+      subtitle: "Machine Unlearning",
+      desc: "AI models don't have to remember everything forever. We help your models selectively \"forget\" outdated or sensitive data to stay accurate and private.",
+      cta: "Start Pruning",
+      learnMore: "Learn More",
+      shelfTitle: "Your Shelf",
+      shelfEmpty: "Shelf is fresh and ready!",
+      shelfPruned: "Library Pruned!"
+    },
+    simulation: {
+      label: "LIVE PRINCIPLE SIMULATION",
+      title: "How Does a Model",
+      titleForget: "Forget?",
+      desc: "Deep Unlearning isn't just deletion. It's a surgical recalibration of the latent space. Watch the process in real-time.",
+      steps: [
+        {
+          title: "1. Influence Mapping",
+          desc: "Identifying the specific neural pathways activated by the target data."
+        },
+        {
+          title: "2. Gradient Extraction",
+          desc: "Calculating the precise 'memory vector' that needs to be neutralized."
+        },
+        {
+          title: "3. Inverse Recalibration",
+          desc: "Applying a surgical pulse to shift weights away from the target memory."
+        },
+        {
+          title: "4. Knowledge Preservation",
+          desc: "Verifying that unrelated knowledge remains stable and untouched."
+        }
+      ]
+    },
+    workflow: {
+      title: "The Mindful Workflow",
+      desc: "Three simple steps to maintain a clean, high-performance digital library.",
+      steps: [
+        {
+          title: "Identify",
+          desc: "Pinpoint specific data points, biases, or private information that the model should no longer retain."
+        },
+        {
+          title: "Unlearn",
+          desc: "Execute selective forgetting algorithms that remove the influence of target data without full retraining."
+        },
+        {
+          title: "Verify",
+          desc: "Validate that the model has successfully \"forgotten\" the data while maintaining its overall performance."
+        }
+      ]
+    },
+    technical: {
+      label: "TECHNICAL MANUSCRIPT v1.0",
+      title: "The Architecture of",
+      subtitle: "Deep Unlearning",
+      intro: "Unlike traditional deletion, Deep Unlearning doesn't just remove a file. It recalibrates the model's weights to eliminate the \"influence\" of specific training samples across complex neural layers.",
+      features: [
+        {
+          title: "Influence Functions",
+          desc: "We calculate the Hessian-based influence of each data point. By applying an inverse update, we shift the model parameters away from the target data's gradient without affecting the rest of the knowledge base."
+        },
+        {
+          title: "Fisher Information",
+          desc: "Our algorithm uses Fisher Information Matrices to identify which weights are most critical to the \"forgotten\" data, allowing for surgical precision in weight adjustment."
+        },
+        {
+          title: "Deep Unlearning",
+          desc: "For complex deep neural networks, we implement \"Selective Scrubbing\" to prevent catastrophic forgetting of unrelated knowledge while ensuring the target data's influence is completely neutralized across all layers."
+        }
+      ],
+      fig: "Fig 01. Weight Recalibration",
+      retained: "Retained Weights",
+      unlearned: "Unlearned Influence",
+      recalibrating: "RECALIBRATING...",
+      precision: "SURGICAL PRECISION v2.1",
+      footnote: "* The diagram illustrates how specific parameters associated with target data are identified and neutralized while preserving the integrity of the broader neural network."
+    },
+    cta: {
+      title: "Protect Privacy with",
+      subtitle: "Selective Forgetting",
+      desc: "Compliance made simple. Remove sensitive data from your trained models in minutes, not days.",
+      btn: "Start Your First Unlearning Task"
+    },
+    footer: {
+      desc: "Making the digital world a little more peaceful, one shelf at a time.",
+      links: "Links",
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
+      contact: "Contact Us",
+      social: "Social",
+      copyright: "© 2026 Mindful AI. Built with love and pixel art."
+    },
+    modal: {
+      title: "Unlearning Terminal",
+      step1Title: "Step 1: Select Target Data",
+      step1Desc: "Pick the data points you want the model to \"forget\".",
+      btnPrune: "Start Pruning",
+      step2Title: "Analyzing Influence...",
+      step2Desc: "Calculating Hessian-based gradients for target data points.",
+      step3Title: "Deep Unlearning Protocol",
+      step3Desc: "Applying inverse updates to model parameters across neural layers.",
+      successTitle: "Unlearning Complete!",
+      successDesc: "The model has successfully forgotten the selected data points. Your digital library is now fresh and compliant.",
+      btnClose: "Close Terminal",
+      btnNew: "New Task",
+      sessionId: "Session ID",
+      complete: "COMPLETE",
+      optimizing: "OPTIMIZING",
+      protocol: "Mindful AI v2.1.0 • Secure Selective Forgetting Protocol"
+    }
+  },
+  ko: {
+    nav: {
+      home: "홈",
+      workflow: "워크플로우",
+      technical: "기술 원리",
+      getStarted: "시작하기"
+    },
+    hero: {
+      title: "데이터 정제와",
+      subtitle: "Machine Unlearning의 미학",
+      desc: "AI 모델이 모든 것을 영원히 기억할 필요는 없습니다. 우리는 모델이 오래되거나 민감한 데이터를 선택적으로 \"forget\"하여 정확성과 프라이버시를 유지하도록 돕습니다.",
+      cta: "Pruning 시작하기",
+      learnMore: "더 알아보기",
+      shelfTitle: "나의 서재",
+      shelfEmpty: "서재가 깨끗하게 정리되었습니다!",
+      shelfPruned: "라이브러리 Pruning 완료!"
+    },
+    simulation: {
+      label: "실시간 원리 시뮬레이션",
+      title: "모델은 어떻게",
+      titleForget: "Forget 하는가?",
+      desc: "Deep Unlearning은 단순한 삭제가 아닙니다. 이는 latent space의 정교한 재보정 과정입니다. 실시간으로 진행되는 과정을 확인해보세요.",
+      steps: [
+        {
+          title: "1. Influence Mapping",
+          desc: "대상 데이터에 의해 활성화된 특정 신경망 경로를 식별합니다."
+        },
+        {
+          title: "2. Gradient Extraction",
+          desc: "중화시켜야 할 정확한 'memory vector'를 계산합니다."
+        },
+        {
+          title: "3. Inverse Recalibration",
+          desc: "대상 메모리로부터 가중치를 이동시키기 위해 정밀한 펄스를 적용합니다."
+        },
+        {
+          title: "4. Knowledge Preservation",
+          desc: "관련 없는 지식들이 안정적으로 유지되고 훼손되지 않았는지 검증합니다."
+        }
+      ]
+    },
+    workflow: {
+      title: "Mindful 워크플로우",
+      desc: "깨끗하고 고성능인 디지털 라이브러리를 유지하기 위한 세 가지 간단한 단계입니다.",
+      steps: [
+        {
+          title: "Identify",
+          desc: "모델이 더 이상 보유해서는 안 되는 특정 데이터 포인트, 편향 또는 개인 정보를 정확히 찾아냅니다."
+        },
+        {
+          title: "Unlearn",
+          desc: "전체 재학습 없이 대상 데이터의 영향을 제거하는 선택적 망각 알고리즘을 실행합니다."
+        },
+        {
+          title: "Verify",
+          desc: "모델이 전체 성능을 유지하면서 데이터를 성공적으로 \"forget\" 했는지 검증합니다."
+        }
+      ]
+    },
+    technical: {
+      label: "기술 명세서 v1.0",
+      title: "아키텍처:",
+      subtitle: "Deep Unlearning",
+      intro: "전통적인 삭제 방식과 달리, Deep Unlearning은 단순히 파일을 제거하지 않습니다. 복잡한 신경망 레이어 전반에서 특정 학습 샘플의 \"influence\"를 제거하기 위해 모델의 가중치를 재보정합니다.",
+      features: [
+        {
+          title: "Influence Functions",
+          desc: "각 데이터 포인트의 Hessian-based influence를 계산합니다. 역방향 업데이트를 적용하여, 나머지 지식 베이스에 영향을 주지 않고 대상 데이터의 gradient로부터 모델 파라미터를 이동시킵니다."
+        },
+        {
+          title: "Fisher Information",
+          desc: "우리의 알고리즘은 Fisher Information Matrices를 사용하여 \"forgotten\" 데이터에 가장 중요한 가중치를 식별하고, 가중치 조정에 있어 정밀한 정확도를 제공합니다."
+        },
+        {
+          title: "Deep Unlearning",
+          desc: "복잡한 심층 신경망을 위해, 대상 데이터의 영향이 모든 레이어에서 완전히 중화되도록 보장하면서 관련 없는 지식의 catastrophic forgetting을 방지하는 \"Selective Scrubbing\"을 구현합니다."
+        }
+      ],
+      fig: "Fig 01. 가중치 재보정 (Weight Recalibration)",
+      retained: "유지된 가중치 (Retained Weights)",
+      unlearned: "제거된 영향 (Unlearned Influence)",
+      recalibrating: "재보정 중 (RECALIBRATING...)",
+      precision: "정밀 재보정 (SURGICAL PRECISION) v2.1",
+      footnote: "* 이 다이어그램은 대상 데이터와 관련된 특정 파라미터가 어떻게 식별되고 중화되는지, 그리고 광범위한 신경망의 무결성을 어떻게 보존하는지 보여줍니다."
+    },
+    cta: {
+      title: "프라이버시 보호를 위한",
+      subtitle: "Selective Forgetting",
+      desc: "컴플라이언스 준수가 쉬워집니다. 학습된 모델에서 민감한 데이터를 며칠이 아닌 단 몇 분 만에 제거하세요.",
+      btn: "첫 번째 Unlearning 작업 시작하기"
+    },
+    footer: {
+      desc: "디지털 세상을 조금 더 평화롭게 만듭니다. 한 번에 한 칸씩.",
+      links: "링크",
+      privacy: "개인정보 처리방침",
+      terms: "이용약관",
+      contact: "문의하기",
+      social: "소셜",
+      copyright: "© 2026 Mindful AI. 사랑과 픽셀 아트로 제작되었습니다."
+    },
+    modal: {
+      title: "Unlearning 터미널",
+      step1Title: "1단계: 대상 데이터 선택",
+      step1Desc: "모델이 \"forget\" 하길 원하는 데이터 포인트를 선택하세요.",
+      btnPrune: "Pruning 시작",
+      step2Title: "Influence 분석 중...",
+      step2Desc: "대상 데이터 포인트에 대한 Hessian-based gradients를 계산하고 있습니다.",
+      step3Title: "Deep Unlearning 프로토콜",
+      step3Desc: "신경망 레이어 전반의 모델 파라미터에 역방향 업데이트를 적용하고 있습니다.",
+      successTitle: "Unlearning 완료!",
+      successDesc: "모델이 선택된 데이터 포인트를 성공적으로 망각했습니다. 당신의 디지털 라이브러리는 이제 최신 상태이며 규정을 준수합니다.",
+      btnClose: "터미널 닫기",
+      btnNew: "새 작업",
+      sessionId: "세션 ID",
+      complete: "완료",
+      optimizing: "최적화 중",
+      protocol: "Mindful AI v2.1.0 • 보안 Selective Forgetting 프로토콜"
+    }
+  }
+};
+
 // --- Demo Modal Component ---
-const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const DemoModal = ({ isOpen, onClose, lang }: { isOpen: boolean; onClose: () => void; lang: 'en' | 'ko' }) => {
+  const t = translations[lang].modal;
   const [step, setStep] = useState<'selection' | 'analysis' | 'recalibration' | 'success'>('selection');
   const [progress, setProgress] = useState(0);
   const [selectedData, setSelectedData] = useState<number[]>([]);
@@ -77,8 +338,8 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
               <RefreshCw className={`text-white w-6 h-6 ${step === 'analysis' || step === 'recalibration' ? 'animate-spin' : ''}`} />
             </div>
             <div>
-              <h3 className="font-pixel text-2xl text-slate-900 leading-none">Unlearning Terminal</h3>
-              <p className="text-xs text-rose-400 font-bold uppercase tracking-widest mt-1">Session ID: {Math.random().toString(16).slice(2, 10)}</p>
+              <h3 className="font-pixel text-2xl text-slate-900 leading-none">{t.title}</h3>
+              <p className="text-xs text-rose-400 font-bold uppercase tracking-widest mt-1">{t.sessionId}: {Math.random().toString(16).slice(2, 10)}</p>
             </div>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-rose-100 rounded-full transition-colors">
@@ -91,8 +352,8 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
           {step === 'selection' && (
             <div className="space-y-6">
               <div className="text-center mb-8">
-                <h4 className="text-2xl font-pixel text-slate-800 mb-2">Step 1: Select Target Data</h4>
-                <p className="text-slate-500">Pick the data points you want the model to "forget".</p>
+                <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step1Title}</h4>
+                <p className="text-slate-500">{t.step1Desc}</p>
               </div>
               
               <div className="grid grid-cols-5 gap-4">
@@ -127,7 +388,7 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                       : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                   }`}
                 >
-                  Start Pruning {selectedData.length > 0 && `(${selectedData.length})`}
+                  {t.btnPrune} {selectedData.length > 0 && `(${selectedData.length})`}
                 </button>
               </div>
             </div>
@@ -145,8 +406,8 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   <Layers className="w-10 h-10 text-rose-400" />
                 </div>
               </div>
-              <h4 className="text-2xl font-pixel text-slate-800 mb-2">Analyzing Influence...</h4>
-              <p className="text-slate-500 mb-8">Calculating Hessian-based gradients for target data points.</p>
+              <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step2Title}</h4>
+              <p className="text-slate-500 mb-8">{t.step2Desc}</p>
               
               <div className="w-full max-w-md bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-slate-200">
                 <motion.div 
@@ -155,7 +416,7 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   className="h-full bg-rose-400"
                 />
               </div>
-              <p className="mt-4 font-pixel text-rose-400">{progress}% COMPLETE</p>
+              <p className="mt-4 font-pixel text-rose-400">{progress}% {t.complete}</p>
             </div>
           )}
 
@@ -175,8 +436,8 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   />
                 ))}
               </div>
-              <h4 className="text-2xl font-pixel text-slate-800 mb-2">Recalibrating Weights</h4>
-              <p className="text-slate-500 mb-8">Applying inverse updates to model parameters.</p>
+              <h4 className="text-2xl font-pixel text-slate-800 mb-2">{t.step3Title}</h4>
+              <p className="text-slate-500 mb-8">{t.step3Desc}</p>
               
               <div className="w-full max-w-md bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-slate-200">
                 <motion.div 
@@ -185,7 +446,7 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   className="h-full bg-emerald-400"
                 />
               </div>
-              <p className="mt-4 font-pixel text-emerald-500">OPTIMIZING... {progress}%</p>
+              <p className="mt-4 font-pixel text-emerald-500">{t.optimizing}... {progress}%</p>
             </div>
           )}
 
@@ -198,9 +459,9 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
               >
                 <CheckCircle className="w-16 h-16 text-emerald-500" />
               </motion.div>
-              <h4 className="text-3xl font-pixel text-slate-800 mb-2">Unlearning Complete!</h4>
+              <h4 className="text-3xl font-pixel text-slate-800 mb-2">{t.successTitle}</h4>
               <p className="text-slate-600 mb-12 max-w-md">
-                The model has successfully forgotten the selected data points. Your digital library is now fresh and compliant.
+                {t.successDesc}
               </p>
               
               <div className="flex gap-4">
@@ -208,7 +469,7 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   onClick={onClose}
                   className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all"
                 >
-                  Close Terminal
+                  {t.btnClose}
                 </button>
                 <button
                   onClick={() => {
@@ -218,7 +479,7 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   }}
                   className="px-8 py-4 border-2 border-rose-100 text-rose-400 rounded-2xl font-bold hover:bg-rose-50 transition-all"
                 >
-                  New Task
+                  {t.btnNew}
                 </button>
               </div>
             </div>
@@ -228,7 +489,7 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
         {/* Modal Footer */}
         <div className="bg-slate-50 p-4 border-t-4 border-rose-100 flex justify-center">
           <p className="text-[10px] font-pixel text-slate-400 tracking-widest uppercase">
-            Mindful AI v2.1.0 • Secure Selective Forgetting Protocol
+            {t.protocol}
           </p>
         </div>
       </motion.div>
@@ -236,7 +497,195 @@ const DemoModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
   );
 };
 
+// --- Simulation Lab Component ---
+const SimulationLab = ({ lang }: { lang: 'en' | 'ko' }) => {
+  const t = translations[lang].simulation;
+  const [tick, setTick] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const steps = [
+    {
+      title: t.steps[0].title,
+      desc: t.steps[0].desc,
+      color: "text-rose-400",
+      bg: "bg-rose-400"
+    },
+    {
+      title: t.steps[1].title,
+      desc: t.steps[1].desc,
+      color: "text-amber-400",
+      bg: "bg-amber-400"
+    },
+    {
+      title: t.steps[2].title,
+      desc: t.steps[2].desc,
+      color: "text-emerald-400",
+      bg: "bg-emerald-400"
+    },
+    {
+      title: t.steps[3].title,
+      desc: t.steps[3].desc,
+      color: "text-blue-400",
+      bg: "bg-blue-400"
+    }
+  ];
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isPlaying) {
+      interval = setInterval(() => {
+        setTick(prev => (prev + 1) % steps.length);
+      }, 3000);
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
+  return (
+    <section className="py-24 bg-white overflow-hidden border-y border-rose-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-50 text-rose-500 font-pixel text-xs mb-4"
+          >
+            <Activity className="w-4 h-4" /> {t.label}
+          </motion.div>
+          <h2 className="text-4xl lg:text-5xl font-pixel text-slate-900 mb-6">
+            {t.title} <span className="text-rose-400">{t.titleForget}</span>
+          </h2>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            {t.desc}
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Simulation Visualizer */}
+          <div className="relative bg-slate-900 rounded-[2.5rem] p-8 aspect-square lg:aspect-video flex items-center justify-center overflow-hidden border-8 border-slate-800 shadow-2xl">
+            <div className="absolute inset-0 opacity-20 pointer-events-none">
+              <div className="absolute inset-0 bg-[radial-gradient(#F43F5E_1px,transparent_1px)] [background-size:20px_20px]" />
+            </div>
+
+            {/* Neural Net Visualization */}
+            <div className="relative z-10 w-full h-full flex items-center justify-around px-12">
+              {[0, 1, 2].map((layerIndex) => (
+                <div key={layerIndex} className="flex flex-col gap-8">
+                  {Array.from({ length: layerIndex === 1 ? 4 : 3 }).map((_, nodeIndex) => (
+                    <motion.div
+                      key={nodeIndex}
+                      animate={{
+                        scale: tick === layerIndex ? [1, 1.2, 1] : 1,
+                        boxShadow: tick === layerIndex 
+                          ? `0 0 20px ${steps[tick].bg.replace('bg-', '')}` 
+                          : 'none',
+                        borderColor: tick === layerIndex ? '#F43F5E' : '#334155'
+                      }}
+                      className={`w-12 h-12 rounded-xl border-2 bg-slate-800 flex items-center justify-center relative`}
+                    >
+                      <Cpu className={`w-6 h-6 ${tick === layerIndex ? 'text-rose-400' : 'text-slate-600'}`} />
+                      
+                      {/* Connections */}
+                      {layerIndex < 2 && (
+                        <div className="absolute left-full w-24 h-px bg-slate-700 -z-10">
+                          <motion.div
+                            animate={{
+                              left: ['0%', '100%'],
+                              opacity: tick === layerIndex ? [0, 1, 0] : 0
+                            }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                            className="absolute top-1/2 -translate-y-1/2 w-4 h-1 bg-rose-400 blur-[2px]"
+                          />
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* Pulse Effect */}
+            <AnimatePresence>
+              {tick === 2 && (
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: [0, 2, 3], opacity: [0, 0.5, 0] }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="absolute inset-0 bg-emerald-400/20 rounded-full"
+                />
+              )}
+            </AnimatePresence>
+
+            {/* Controls */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-slate-800/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-slate-700">
+              <button 
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="p-2 hover:bg-slate-700 rounded-lg transition-colors text-white"
+              >
+                {isPlaying ? <X className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+              </button>
+              <div className="h-4 w-px bg-slate-700" />
+              <div className="flex gap-2">
+                {steps.map((_, i) => (
+                  <div 
+                    key={i} 
+                    className={`w-2 h-2 rounded-full transition-all duration-500 ${tick === i ? 'bg-rose-400 w-6' : 'bg-slate-600'}`} 
+                  />
+                ))}
+              </div>
+              <button 
+                onClick={() => setTick(0)}
+                className="p-2 hover:bg-slate-700 rounded-lg transition-colors text-slate-400"
+              >
+                <RotateCcw className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Narrative Content */}
+          <div className="space-y-8">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  opacity: tick === i ? 1 : 0.4,
+                  x: tick === i ? 20 : 0,
+                  scale: tick === i ? 1.02 : 1
+                }}
+                className={`p-6 rounded-3xl border-2 transition-all duration-500 ${
+                  tick === i ? 'bg-rose-50 border-rose-100 shadow-lg' : 'bg-transparent border-transparent'
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                    tick === i ? step.bg : 'bg-slate-100'
+                  }`}>
+                    {i === 0 && <Activity className="w-5 h-5 text-white" />}
+                    {i === 1 && <Layers className="w-5 h-5 text-white" />}
+                    {i === 2 && <Zap className="w-5 h-5 text-white" />}
+                    {i === 3 && <ShieldCheck className="w-5 h-5 text-white" />}
+                  </div>
+                  <div>
+                    <h3 className={`font-pixel text-xl mb-2 ${tick === i ? 'text-slate-900' : 'text-slate-400'}`}>
+                      {step.title}
+                    </h3>
+                    <p className={`text-lg leading-relaxed ${tick === i ? 'text-slate-600' : 'text-slate-400'}`}>
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function App() {
+  const [lang, setLang] = useState<'en' | 'ko'>('en');
+  const t = translations[lang];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [heroImage, setHeroImage] = useState<string | null>(null);
@@ -329,14 +778,22 @@ export default function App() {
             </div>
             
             <div className="hidden md:flex items-center gap-8">
-              <a href="#hero" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">Home</a>
-              <a href="#workflow" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">Workflow</a>
-              <a href="#technical" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">Technical</a>
+              <a href="#hero" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.home}</a>
+              <a href="#workflow" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.workflow}</a>
+              <a href="#technical" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.technical}</a>
+              
+              <button 
+                onClick={() => setLang(lang === 'en' ? 'ko' : 'en')}
+                className="flex items-center gap-1 text-slate-500 hover:text-rose-400 font-pixel text-sm transition-colors border-2 border-slate-100 px-3 py-1 rounded-xl"
+              >
+                <RefreshCw className="w-3 h-3" /> {lang === 'en' ? 'KO' : 'EN'}
+              </button>
+
               <button 
                 onClick={() => setIsDemoOpen(true)}
                 className="bg-rose-400 hover:bg-rose-500 text-white px-6 py-2 rounded-full font-medium transition-all transform hover:scale-105 shadow-sm"
               >
-                Get Started
+                {t.nav.getStarted}
               </button>
             </div>
 
@@ -357,9 +814,18 @@ export default function App() {
               exit={{ opacity: 0, y: -20 }}
               className="md:hidden bg-white border-b border-rose-100 px-4 py-6 flex flex-col gap-4"
             >
-              <a href="#hero" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>Home</a>
-              <a href="#workflow" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>Workflow</a>
-              <a href="#technical" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>Technical</a>
+              <a href="#hero" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>{t.nav.home}</a>
+              <a href="#workflow" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>{t.nav.workflow}</a>
+              <a href="#technical" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>{t.nav.technical}</a>
+              <button 
+                onClick={() => {
+                  setLang(lang === 'en' ? 'ko' : 'en');
+                  setIsMenuOpen(false);
+                }}
+                className="text-slate-600 font-medium text-left"
+              >
+                {lang === 'en' ? 'Language: 한국어' : 'Language: English'}
+              </button>
               <button 
                 onClick={() => {
                   setIsDemoOpen(true);
@@ -367,7 +833,7 @@ export default function App() {
                 }}
                 className="bg-rose-400 text-white px-6 py-2 rounded-full font-medium"
               >
-                Get Started
+                {t.nav.getStarted}
               </button>
             </motion.div>
           )}
@@ -385,24 +851,24 @@ export default function App() {
                 transition={{ duration: 0.8 }}
               >
                 <h1 className="text-5xl lg:text-7xl font-pixel text-slate-900 leading-tight mb-6">
-                  The Art of <br />
-                  <span className="text-rose-400">Machine Unlearning</span>
+                  {t.hero.title} <br />
+                  <span className="text-rose-400">{t.hero.subtitle}</span>
                 </h1>
                 <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">
-                  AI models don't have to remember everything forever. We help your models selectively "forget" outdated or sensitive data to stay accurate and private.
+                  {t.hero.desc}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <button 
                     onClick={() => setIsDemoOpen(true)}
                     className="bg-rose-400 hover:bg-rose-500 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-lg shadow-rose-200/50 flex items-center gap-2"
                   >
-                    Start Pruning <Sparkles className="w-5 h-5" />
+                    {t.hero.cta} <Sparkles className="w-5 h-5" />
                   </button>
                   <a 
                     href="#technical"
                     className="bg-white border-2 border-rose-100 text-rose-400 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-rose-50 transition-all flex items-center justify-center"
                   >
-                    Learn More
+                    {t.hero.learnMore}
                   </a>
                 </div>
               </motion.div>
@@ -429,7 +895,7 @@ export default function App() {
                   <div className="absolute inset-0 flex flex-col justify-end p-8 bg-gradient-to-t from-black/20 to-transparent">
                     <div className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl border border-white/50 shadow-xl">
                       <div className="flex justify-between items-center mb-4">
-                        <span className="font-pixel text-xl text-slate-800">Your Shelf</span>
+                        <span className="font-pixel text-xl text-slate-800">{t.hero.shelfTitle}</span>
                         <button 
                           onClick={resetBooks}
                           className="text-rose-400 hover:rotate-180 transition-transform duration-500"
@@ -460,7 +926,7 @@ export default function App() {
                             animate={{ opacity: 1 }}
                             className="w-full py-4 text-center text-slate-400 font-medium italic"
                           >
-                            Shelf is fresh and ready!
+                            {t.hero.shelfEmpty}
                           </motion.div>
                         )}
                       </div>
@@ -484,35 +950,38 @@ export default function App() {
           </div>
         </section>
 
+        {/* Simulation Lab Section */}
+        <SimulationLab lang={lang} />
+
         {/* Workflow Section */}
         <section id="workflow" className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-20">
-              <h2 className="text-4xl font-pixel text-slate-900 mb-4">The Mindful Workflow</h2>
+              <h2 className="text-4xl font-pixel text-slate-900 mb-4">{t.workflow.title}</h2>
               <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-                Three simple steps to maintain a clean, high-performance digital library.
+                {t.workflow.desc}
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-12">
               {[
                 {
-                  title: 'Identify',
-                  desc: 'Pinpoint specific data points, biases, or private information that the model should no longer retain.',
+                  title: t.workflow.steps[0].title,
+                  desc: t.workflow.steps[0].desc,
                   icon: <Layers className="w-8 h-8 text-amber-400" />,
                   color: 'bg-amber-50',
                   border: 'border-amber-100',
                 },
                 {
-                  title: 'Unlearn',
-                  desc: 'Execute selective forgetting algorithms that remove the influence of target data without full retraining.',
+                  title: t.workflow.steps[1].title,
+                  desc: t.workflow.steps[1].desc,
                   icon: <Trash2 className="w-8 h-8 text-rose-400" />,
                   color: 'bg-rose-50',
                   border: 'border-rose-100',
                 },
                 {
-                  title: 'Verify',
-                  desc: 'Validate that the model has successfully "forgotten" the data while maintaining its overall performance.',
+                  title: t.workflow.steps[2].title,
+                  desc: t.workflow.steps[2].desc,
                   icon: <CheckCircle className="w-8 h-8 text-emerald-400" />,
                   color: 'bg-emerald-50',
                   border: 'border-emerald-100',
@@ -546,30 +1015,38 @@ export default function App() {
             <div className="flex flex-col lg:flex-row gap-16 items-center">
               <div className="lg:w-1/2">
                 <div className="inline-block px-4 py-1 bg-rose-100 text-rose-500 rounded-full text-sm font-bold mb-6 font-pixel">
-                  TECHNICAL MANUSCRIPT v1.0
+                  {t.technical.label}
                 </div>
                 <h2 className="text-4xl font-pixel text-slate-900 mb-8 leading-tight">
-                  The Architecture of <br />
-                  <span className="text-rose-400">Selective Forgetting</span>
+                  {t.technical.title} <br />
+                  <span className="text-rose-400">{t.technical.subtitle}</span>
                 </h2>
                 <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
                   <p>
-                    Unlike traditional deletion, <span className="font-bold text-slate-800">Machine Unlearning</span> doesn't just remove a file. It recalibrates the model's weights to eliminate the "influence" of specific training samples.
+                    {t.technical.intro}
                   </p>
                   <div className="bg-white p-6 rounded-2xl border-2 border-rose-50 shadow-sm">
                     <h4 className="font-pixel text-xl text-slate-800 mb-3 flex items-center gap-2">
-                      <RefreshCw className="w-5 h-5 text-rose-400" /> Influence Functions
+                      <RefreshCw className="w-5 h-5 text-rose-400" /> {t.technical.features[0].title}
                     </h4>
                     <p className="text-sm">
-                      We calculate the Hessian-based influence of each data point. By applying an inverse update, we shift the model parameters away from the target data's gradient without affecting the rest of the knowledge base.
+                      {t.technical.features[0].desc}
                     </p>
                   </div>
                   <div className="bg-white p-6 rounded-2xl border-2 border-rose-50 shadow-sm">
                     <h4 className="font-pixel text-xl text-slate-800 mb-3 flex items-center gap-2">
-                      <Layers className="w-5 h-5 text-rose-400" /> Fisher Information
+                      <Layers className="w-5 h-5 text-rose-400" /> {t.technical.features[1].title}
                     </h4>
                     <p className="text-sm">
-                      Our algorithm uses Fisher Information Matrices to identify which weights are most critical to the "forgotten" data, allowing for surgical precision in weight adjustment.
+                      {t.technical.features[1].desc}
+                    </p>
+                  </div>
+                  <div className="bg-white p-6 rounded-2xl border-2 border-rose-50 shadow-sm">
+                    <h4 className="font-pixel text-xl text-slate-800 mb-3 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-rose-400" /> {t.technical.features[2].title}
+                    </h4>
+                    <p className="text-sm">
+                      {t.technical.features[2].desc}
                     </p>
                   </div>
                 </div>
@@ -578,7 +1055,7 @@ export default function App() {
               <div className="lg:w-1/2 w-full">
                 <div className="bg-white rounded-[2.5rem] p-8 shadow-xl border-4 border-rose-100 relative">
                   <div className="absolute top-4 right-8 font-pixel text-slate-300 text-xs uppercase tracking-widest">
-                    Fig 01. Weight Recalibration
+                    {t.technical.fig}
                   </div>
                   
                   {/* Technical Diagram: Weight Map Visualization */}
@@ -624,11 +1101,11 @@ export default function App() {
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center px-4">
                       <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-emerald-400 rounded-sm" />
-                        <span className="text-[10px] font-pixel text-slate-400">Retained Weights</span>
+                        <span className="text-[10px] font-pixel text-slate-400">{t.technical.retained}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-rose-400 rounded-sm" />
-                        <span className="text-[10px] font-pixel text-slate-400">Unlearned Influence</span>
+                        <span className="text-[10px] font-pixel text-slate-400">{t.technical.unlearned}</span>
                       </div>
                     </div>
 
@@ -639,7 +1116,7 @@ export default function App() {
                         transition={{ duration: 4, repeat: Infinity }}
                         className="bg-slate-900/90 text-white px-4 py-2 rounded-lg font-pixel text-sm border border-white/20 shadow-2xl"
                       >
-                        RECALIBRATING...
+                        {t.technical.recalibrating}
                       </motion.div>
                     </div>
                   </div>
@@ -651,10 +1128,10 @@ export default function App() {
                         <div className="w-2 h-2 rounded-full bg-slate-200" />
                         <div className="w-2 h-2 rounded-full bg-slate-200" />
                       </div>
-                      <span className="font-pixel text-slate-400 text-sm">SURGICAL PRECISION v2.1</span>
+                      <span className="font-pixel text-slate-400 text-sm">{t.technical.precision}</span>
                     </div>
                     <p className="text-xs text-slate-400 leading-relaxed italic">
-                      * The diagram illustrates how specific parameters associated with target data are identified and neutralized while preserving the integrity of the broader neural network.
+                      {t.technical.footnote}
                     </p>
                   </div>
                 </div>
@@ -676,17 +1153,17 @@ export default function App() {
         <section className="py-24 bg-rose-50 relative overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 className="text-4xl lg:text-5xl font-pixel text-slate-900 mb-8 leading-tight">
-              Protect Privacy with <br />
-              <span className="text-rose-400">Selective Forgetting</span>
+              {t.cta.title} <br />
+              <span className="text-rose-400">{t.cta.subtitle}</span>
             </h2>
             <p className="text-xl text-slate-600 mb-12">
-              Compliance made simple. Remove sensitive data from your trained models in minutes, not days.
+              {t.cta.desc}
             </p>
             <button 
               onClick={() => setIsDemoOpen(true)}
               className="bg-slate-900 text-white px-12 py-5 rounded-2xl font-bold text-xl hover:bg-slate-800 transition-all transform hover:scale-105 shadow-xl"
             >
-              Start Your First Unlearning Task
+              {t.cta.btn}
             </button>
           </div>
           
@@ -708,19 +1185,19 @@ export default function App() {
                 <span className="font-pixel text-2xl tracking-tight text-slate-800">Mindful AI</span>
               </div>
               <p className="text-slate-500 max-w-sm leading-relaxed">
-                Making the digital world a little more peaceful, one shelf at a time.
+                {t.footer.desc}
               </p>
             </div>
             <div>
-              <h4 className="font-pixel text-xl text-slate-900 mb-6">Links</h4>
+              <h4 className="font-pixel text-xl text-slate-900 mb-6">{t.footer.links}</h4>
               <ul className="space-y-4 text-slate-500">
-                <li><a href="#" className="hover:text-rose-400 transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-rose-400 transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-rose-400 transition-colors">Contact Us</a></li>
+                <li><a href="#" className="hover:text-rose-400 transition-colors">{t.footer.privacy}</a></li>
+                <li><a href="#" className="hover:text-rose-400 transition-colors">{t.footer.terms}</a></li>
+                <li><a href="#" className="hover:text-rose-400 transition-colors">{t.footer.contact}</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-pixel text-xl text-slate-900 mb-6">Social</h4>
+              <h4 className="font-pixel text-xl text-slate-900 mb-6">{t.footer.social}</h4>
               <div className="flex gap-4">
                 <a href="#" className="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center text-rose-400 hover:bg-rose-400 hover:text-white transition-all">
                   <Twitter className="w-5 h-5" />
@@ -735,7 +1212,7 @@ export default function App() {
             </div>
           </div>
           <div className="pt-12 border-t border-rose-50 text-center text-slate-400 text-sm">
-            © 2026 Mindful AI. Built with love and pixel art.
+            {t.footer.copyright}
           </div>
         </div>
       </footer>
@@ -755,7 +1232,7 @@ export default function App() {
 
       <AnimatePresence>
         {isDemoOpen && (
-          <DemoModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
+          <DemoModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} lang={lang} />
         )}
       </AnimatePresence>
     </div>
