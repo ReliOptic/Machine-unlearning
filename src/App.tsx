@@ -37,6 +37,7 @@ const translations = {
       home: "Home",
       workflow: "Workflow",
       technical: "Technical",
+      researcher: "Researcher",
       getStarted: "Get Started"
     },
     hero: {
@@ -75,7 +76,7 @@ const translations = {
     },
     workflow: {
       title: "The Mindful Workflow",
-      desc: "Three simple steps to maintain a clean, high-performance digital library.",
+      desc: "Four critical stages to maintain a clean, high-performance digital library without compromising system stability.",
       steps: [
         {
           title: "Identify",
@@ -84,6 +85,10 @@ const translations = {
         {
           title: "Unlearn",
           desc: "Execute selective forgetting algorithms that remove the influence of target data without full retraining."
+        },
+        {
+          title: "Stabilize",
+          desc: "Apply Harness Engineering to prevent catastrophic forgetting. We ensure zero-downtime and preserve existing model utility during the recalibration."
         },
         {
           title: "Verify",
@@ -149,6 +154,28 @@ const translations = {
       complete: "COMPLETE",
       optimizing: "OPTIMIZING",
       protocol: "Mindful AI v2.1.0 • Secure Selective Forgetting Protocol"
+    },
+    researcher: {
+      label: "RESEARCHER PORTAL",
+      title: "Advanced",
+      subtitle: "Implementation Details",
+      desc: "For CS researchers and engineers looking to integrate Machine Unlearning into production environments via CLI.",
+      features: [
+        {
+          title: "Hessian-Free Approximation",
+          desc: "We utilize stochastic estimation to bypass the computational bottleneck of direct Hessian inversion, enabling real-time influence mapping."
+        },
+        {
+          title: "SISA Framework",
+          desc: "Sharded, Isolated, Sliced, and Aggregated training patterns ensure deterministic forgetting with minimal overhead."
+        },
+        {
+          title: "DP Guardrails",
+          desc: "Differential Privacy techniques are applied to the unlearning pulse to prevent membership inference attacks on the forgotten set."
+        }
+      ],
+      cliTitle: "Direct API Access",
+      cliDesc: "Trigger a selective scrubbing task via curl:"
     }
   },
   ko: {
@@ -156,6 +183,7 @@ const translations = {
       home: "홈",
       workflow: "워크플로우",
       technical: "기술 원리",
+      researcher: "연구자용",
       getStarted: "시작하기"
     },
     hero: {
@@ -194,7 +222,7 @@ const translations = {
     },
     workflow: {
       title: "Mindful 워크플로우",
-      desc: "깨끗하고 고성능인 디지털 라이브러리를 유지하기 위한 세 가지 간단한 단계입니다.",
+      desc: "시스템 안정성을 저해하지 않으면서 깨끗하고 고성능인 디지털 라이브러리를 유지하기 위한 4단계 프로세스입니다.",
       steps: [
         {
           title: "Identify",
@@ -203,6 +231,10 @@ const translations = {
         {
           title: "Unlearn",
           desc: "전체 재학습 없이 대상 데이터의 영향을 제거하는 선택적 망각 알고리즘을 실행합니다."
+        },
+        {
+          title: "Stabilize",
+          desc: "Harness Engineering을 적용하여 catastrophic forgetting을 방지합니다. 재보정 중에도 시스템 중단 없이 기존 모델의 유틸리티를 보존합니다."
         },
         {
           title: "Verify",
@@ -268,6 +300,28 @@ const translations = {
       complete: "완료",
       optimizing: "최적화 중",
       protocol: "Mindful AI v2.1.0 • 보안 Selective Forgetting 프로토콜"
+    },
+    researcher: {
+      label: "연구자 포털",
+      title: "심화",
+      subtitle: "구현 세부 사항",
+      desc: "CLI를 통해 Machine Unlearning을 프로덕션 환경에 통합하려는 CS 연구원 및 엔지니어를 위한 섹션입니다.",
+      features: [
+        {
+          title: "Hessian-Free Approximation",
+          desc: "직접적인 Hessian inversion의 계산 병목 현상을 피하기 위해 확률적 추정(stochastic estimation)을 활용하여 실시간 influence mapping을 가능하게 합니다."
+        },
+        {
+          title: "SISA Framework",
+          desc: "Sharded, Isolated, Sliced, and Aggregated 학습 패턴을 통해 최소한의 오버헤드로 결정론적 망각(deterministic forgetting)을 보장합니다."
+        },
+        {
+          title: "DP Guardrails",
+          desc: "망각된 데이터셋에 대한 멤버십 추론 공격을 방지하기 위해 unlearning 펄스에 Differential Privacy 기술을 적용합니다."
+        }
+      ],
+      cliTitle: "직접 API 액세스",
+      cliDesc: "curl을 통해 selective scrubbing 작업을 트리거합니다:"
     }
   }
 };
@@ -781,6 +835,7 @@ export default function App() {
               <a href="#hero" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.home}</a>
               <a href="#workflow" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.workflow}</a>
               <a href="#technical" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.technical}</a>
+              <a href="#researcher" className="text-slate-600 hover:text-rose-500 transition-colors font-medium">{t.nav.researcher}</a>
               
               <button 
                 onClick={() => setLang(lang === 'en' ? 'ko' : 'en')}
@@ -817,6 +872,7 @@ export default function App() {
               <a href="#hero" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>{t.nav.home}</a>
               <a href="#workflow" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>{t.nav.workflow}</a>
               <a href="#technical" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>{t.nav.technical}</a>
+              <a href="#researcher" className="text-slate-600 font-medium" onClick={() => setIsMenuOpen(false)}>{t.nav.researcher}</a>
               <button 
                 onClick={() => {
                   setLang(lang === 'en' ? 'ko' : 'en');
@@ -963,7 +1019,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-12">
+            <div className="grid md:grid-cols-4 gap-8">
               {[
                 {
                   title: t.workflow.steps[0].title,
@@ -982,6 +1038,13 @@ export default function App() {
                 {
                   title: t.workflow.steps[2].title,
                   desc: t.workflow.steps[2].desc,
+                  icon: <Activity className="w-8 h-8 text-blue-400" />,
+                  color: 'bg-blue-50',
+                  border: 'border-blue-100',
+                },
+                {
+                  title: t.workflow.steps[3].title,
+                  desc: t.workflow.steps[3].desc,
                   icon: <CheckCircle className="w-8 h-8 text-emerald-400" />,
                   color: 'bg-emerald-50',
                   border: 'border-emerald-100',
@@ -992,14 +1055,14 @@ export default function App() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.2 }}
-                  className={`p-8 rounded-3xl ${step.color} border-2 ${step.border} hover:shadow-xl transition-shadow group`}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`p-6 rounded-3xl ${step.color} border-2 ${step.border} hover:shadow-xl transition-shadow group`}
                 >
-                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform">
                     {step.icon}
                   </div>
-                  <h3 className="text-2xl font-pixel text-slate-900 mb-4">{step.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">
+                  <h3 className="text-xl font-pixel text-slate-900 mb-4">{step.title}</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     {step.desc}
                   </p>
                 </motion.div>
@@ -1146,6 +1209,81 @@ export default function App() {
                 {Math.random().toString(16).repeat(10)}
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Researcher Section */}
+        <section id="researcher" className="py-24 bg-white border-b border-rose-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row gap-16">
+              <div className="lg:w-1/2">
+                <div className="inline-block px-4 py-1 bg-slate-100 text-slate-500 rounded-full text-sm font-bold mb-6 font-pixel">
+                  {t.researcher.label}
+                </div>
+                <h2 className="text-4xl font-pixel text-slate-900 mb-8 leading-tight">
+                  {t.researcher.title} <br />
+                  <span className="text-slate-400">{t.researcher.subtitle}</span>
+                </h2>
+                <p className="text-slate-600 text-lg mb-12">
+                  {t.researcher.desc}
+                </p>
+                
+                <div className="space-y-8">
+                  {t.researcher.features.map((f, i) => (
+                    <div key={i} className="flex gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center shrink-0">
+                        <Cpu className="w-6 h-6 text-slate-400" />
+                      </div>
+                      <div>
+                        <h4 className="font-pixel text-lg text-slate-800 mb-2">{f.title}</h4>
+                        <p className="text-slate-500 text-sm leading-relaxed">{f.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="lg:w-1/2">
+                <div className="bg-slate-900 rounded-[2.5rem] p-8 shadow-2xl border-4 border-slate-800 h-full flex flex-col">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-rose-500" />
+                      <div className="w-3 h-3 rounded-full bg-amber-500" />
+                      <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                    </div>
+                    <span className="font-mono text-[10px] text-slate-500 uppercase tracking-widest">Terminal v2.1</span>
+                  </div>
+                  
+                  <div className="flex-grow flex flex-col justify-center">
+                    <h4 className="font-pixel text-white text-xl mb-4">{t.researcher.cliTitle}</h4>
+                    <p className="text-slate-400 text-sm mb-6">{t.researcher.cliDesc}</p>
+                    
+                    <div className="bg-black/50 p-6 rounded-2xl border border-slate-700 font-mono text-sm text-emerald-400 overflow-x-auto">
+                      <div className="flex gap-2 mb-2">
+                        <span className="text-slate-500">$</span>
+                        <span>curl -X POST https://api.mindful.ai/v1/unlearn \</span>
+                      </div>
+                      <div className="flex gap-2 mb-2 pl-4">
+                        <span>-H "Authorization: Bearer $API_KEY" \</span>
+                      </div>
+                      <div className="flex gap-2 pl-4">
+                        <span>-d '{`{"target_ids": ["data_001"], "strategy": "selective_scrubbing"}`}'</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-slate-800 flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[10px] font-pixel text-slate-500">API STATUS: OPERATIONAL</span>
+                    </div>
+                    <button className="text-[10px] font-pixel text-rose-400 hover:text-rose-300 transition-colors uppercase tracking-widest">
+                      View Documentation →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
